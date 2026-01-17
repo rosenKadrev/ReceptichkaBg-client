@@ -1,0 +1,161 @@
+.add-recipe-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+mat-card-title {
+  font-size: 1.8rem;
+  color: #a900a9;
+  margin-bottom: 1.5rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.form-array-container {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+
+  h3 {
+    margin-top: 0;
+    color: #333;
+  }
+}
+
+.dynamic-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  textarea-input {
+    flex: 1;
+  }
+
+  .ingredient-name {
+    flex: 3;
+  }
+
+  .ingredient-quantity,
+  .ingredient-unit {
+    flex: 1;
+  }
+}
+
+.category-processing-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.time-servings {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.image-upload {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+  }
+
+  .upload-hint {
+    color: #666;
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+  }
+
+  input[type="file"] {
+    display: block;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+
+    &::-webkit-file-upload-button {
+      padding: 0.5rem 1rem;
+      border: none;
+      background-color: #3f51b5;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #303f9f;
+      }
+    }
+  }
+
+  .image-preview {
+    position: relative;
+    display: block;
+    margin-top: 1rem;
+
+    .preview-image {
+      max-width: 100%;
+      max-height: 400px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background-color: rgba(255, 255, 255, 0.9);
+
+      &:hover {
+        background-color: white;
+      }
+    }
+  }
+}
+
+button[type="submit"] {
+  align-self: center;
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  font-size: 1rem;
+}
+
+@media (max-width: 700px) {
+  .dynamic-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.7rem 0.3rem;
+  }
+
+  .ingredient-name,
+  .ingredient-quantity,
+  .ingredient-unit {
+    min-width: 0;
+  }
+
+  .dynamic-row {
+    margin: 0;
+  }
+
+  .dynamic-row button[mat-icon-button] {
+    margin: 0;
+  }
+}

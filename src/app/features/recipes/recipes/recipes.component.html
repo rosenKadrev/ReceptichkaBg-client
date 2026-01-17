@@ -1,0 +1,236 @@
+<div class="container">
+  @if(recipeStore.loading()){
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  }@else if(!recipeStore.loading()){
+  @if (segment() === 'my') {
+  <h2 class="recipe-title">Моите рецепти</h2>
+  } @else {
+  <h2 class="recipe-title">Всички рецепти</h2>
+  }
+  <div class="recipe-count">Намерени рецепти: {{ recipeStore.totalResults() }}</div>
+  <button mat-raised-button
+          color="primary"
+          (click)="toggleFilters()"
+          class="filter-toggle-btn">
+    <mat-icon>{{ showFilters ? 'filter_list' : 'filter_list_off' }}</mat-icon>
+    Филтри
+  </button>
+  @if(showFilters){
+  <div class="filters-section show">
+    <div class="filter-row">
+      <mat-form-field appearance="outline"
+                      class="search-field">
+        <mat-label>Търсене по име</mat-label>
+        <input matInput
+               [value]="recipeStore.params().searchText"
+               (input)="onSearchTextChange($event.target.value)"
+               placeholder="Въведете име на рецепта..." />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+
+      @if (segment() === 'my') {
+      <mat-form-field appearance="outline"
+                      class="filter-field">
+        <mat-label>Статус</mat-label>
+        <mat-select [value]="recipeStore.params().status"
+                    (selectionChange)="onStatusChange($event.value)">
+          <mat-option value="">Всички</mat-option>
+          <mat-option value="pending">В изчакване</mat-option>
+          <mat-option value="active">Активна</mat-option>
+          <mat-option value="rejected">Отхвърлена</mat-option>
+        </mat-select>
+      </mat-form-field>
+      } @else if (segment() === 'all') {
+      <mat-form-field appearance="outline"
+                      class="search-field">
+        <mat-label>Създаденa от</mat-label>
+        <input matInput
+               [value]="recipeStore.params().searchByName"
+               (input)="onSearchByNameChange($event.target.value)"
+               placeholder="Въведете име на създател..." />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+      }
+
+      <mat-form-field appearance="outline"
+                      class="filter-field">
+        <mat-label>Категория</mat-label>
+        <mat-select [value]="recipeStore.params().categoryId"
+                    (selectionChange)="onCategoryChange($event.value)">
+          <mat-option value="">Всички</mat-option>
+          @for(category of recipeStore.lookups()?.categories; track category.id){
+          <mat-option [value]="category.id.toString()">{{ category.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline"
+                      class="filter-field">
+        <mat-label>Тип обработка</mat-label>
+        <mat-select [value]="recipeStore.params().typeOfProcessingId"
+                    (selectionChange)="onProcessingTypeChange($event.value)">
+          <mat-option value="">Всички</mat-option>
+          @for(type of recipeStore.lookups()?.processingTypes; track type.id){
+          <mat-option [value]="type.id.toString()">{{ type.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline"
+                      class="filter-field">
+        <mat-label>Трудност</mat-label>
+        <mat-select [value]="recipeStore.params().degreeOfDifficultyId"
+                    (selectionChange)="onDifficultyChange($event.value)">
+          <mat-option value="">Всички</mat-option>
+          @for(difficulty of recipeStore.lookups()?.degreeOfDifficulty; track difficulty.id){
+          <mat-option [value]="difficulty.id.toString()">{{ difficulty.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <div class="d-flex">
+        <mat-form-field appearance="outline"
+                        class="filter-field flex-grow-1 mr-8">
+          <mat-label>Сортиране</mat-label>
+          <mat-select [value]="recipeStore.params().sortBy"
+                      (selectionChange)="onSortChange($event.value)">
+            <mat-option value="createdAt">Дата на добавяне</mat-option>
+            <mat-option value="name">Име</mat-option>
+            <mat-option value="category">Категория</mat-option>
+            <mat-option value="typeOfProcessing">Тип обработка</mat-option>
+            <mat-option value="degreeOfDifficulty">Трудност</mat-option>
+            @if (segment() === 'my') {
+            <mat-option value="status">Статус</mat-option>
+            } @else if (segment() === 'all') {
+            <mat-option value="searchByName">Създаденa от</mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+        <button mat-icon-button
+                matSuffix
+                class="sort-icon-btn"
+                (click)="toggleSortOrder(); $event.stopPropagation()"
+                [matTooltip]="recipeStore.params().sortOrder === 'asc' ? 'Възходящо' : 'Низходящо'"
+                aria-label="Toggle sort order">
+          <mat-icon>{{ recipeStore.params().sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+        </button>
+      </div>
+
+      <button mat-raised-button
+              color="accent"
+              (click)="clearFilters()"
+              class="clear-filters-btn">
+        <mat-icon>clear_all</mat-icon>
+        Изчисти
+      </button>
+    </div>
+  </div>
+  }
+  @if(recipeStore.recipes().length > 0){
+  <div class="recipe-list">
+    @for(recipe of recipeStore.recipes(); track recipe.id){
+    <mat-card class="recipe-card"
+              routerLinkActive="active">
+      @if(recipe.images.length > 0){
+      <img mat-card-image
+           [src]="recipe.images[0].imageUrl"
+           [alt]="recipe.name"
+           class="recipe-image" />
+      } @else {
+      <div mat-card-image
+           class="recipe-image placeholder">
+        <span>Няма снимка</span>
+      </div>
+      }
+
+      <mat-card-header>
+        <mat-card-title [matTooltip]="recipe.name"
+                        matTooltipPosition="above">{{ recipe.name }}
+        </mat-card-title>
+        <mat-card-subtitle class="recipe-subtitle">
+          @if(segment() === 'my'){
+          <strong>Статус:</strong>
+          <span [ngClass]="{
+                          'status-pending': recipe.status === 'pending',
+                          'status-active': recipe.status === 'active',
+                          'status-rejected': recipe.status === 'rejected'
+                        }">
+            {{ getStatusText(recipe.status) }}
+          </span>
+          } @else {
+          <strong>Създаденa от:</strong> {{ recipe.createdBy }}
+          }
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>{{ recipe.description }}</p>
+
+        <div class="recipe-details">
+          <div class="detail-item"><strong>Категория:</strong> {{ recipe.category }}</div>
+          <div class="detail-item">
+            <strong>Тип обработка:</strong> {{ recipe.typeOfProcessing }}
+          </div>
+          <div class="detail-item"><strong>Трудност:</strong> {{ recipe.degreeOfDifficulty }}</div>
+        </div>
+
+        <div class="recipe-meta">
+          <span><strong>Подготовка:</strong> {{ recipe.prepTime || 'N/A' }} мин.</span>
+          <span><strong>Готвене:</strong> {{ recipe.cookTime || 'N/A' }} мин.</span>
+          <span><strong>Порции:</strong> {{ recipe.servings || 'N/A' }}</span>
+        </div>
+      </mat-card-content>
+
+      @if(segment() === 'my'){
+      <mat-card-actions>
+        <button mat-button
+                [routerLink]="['/recipes/my', recipe.id]">Виж рецептата</button>
+        <button mat-button
+                color="warn"
+                (click)="$event.stopPropagation(); onDeleteRecipe(recipe.id)">Изтриване</button>
+      </mat-card-actions>
+      } @else {
+      <mat-card-actions class="recipe-actions">
+        <button mat-button
+                [routerLink]="['/recipes/all', recipe.id]">Виж рецептата</button>
+        @if(userStore.isLoggedIn()) {
+        <button mat-button
+                disabled
+                class="favorite-btn">
+          <mat-icon>favorite</mat-icon>
+        </button>
+        }
+      </mat-card-actions>
+      }
+    </mat-card>
+    }
+  </div>
+  } @else {
+  <div class="no-recipes">
+    <mat-icon class="no-recipes-icon">restaurant_menu</mat-icon>
+    <h2 class="no-recipes-title">Няма намерени рецепти</h2>
+    @if (segment() === 'my') {
+    <p>за тези филтри.</p>
+    <p>Променете филтрите или създайте нова рецепта</p>
+    <button mat-raised-button
+            class="add-recipe-button"
+            color="primary"
+            routerLink="/recipes/add">
+      <mat-icon>add</mat-icon>
+      Добавете рецепта!
+    </button>
+    }
+  </div>
+  }
+  <mat-paginator class="pt-20"
+                 [length]="recipeStore.totalResults()"
+                 [pageSize]="recipeStore.params().pageSize"
+                 [pageSizeOptions]="[6, 9, 12, 15]"
+                 [pageIndex]="recipeStore.params().currentPage - 1"
+                 (page)="onPageChange($event)"
+                 aria-label="Select page">
+  </mat-paginator>
+  }
+</div>

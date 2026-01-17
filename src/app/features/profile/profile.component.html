@@ -1,0 +1,50 @@
+<div class="profile-container">
+  @if(userStore.loading()){
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else {
+    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+      <div class="avatar-section" (click)="fileInput.click()">
+        @if (avatarPreview || userStore.user()?.avatarUrl) {
+          <img
+            [src]="avatarPreview || userStore.user()?.avatarUrl"
+            alt="User Avatar"
+            class="profile-avatar"/>
+        } @else {
+          <mat-icon class="default-avatar-icon">account_circle</mat-icon>
+        }
+        <div class="avatar-overlay">
+          <mat-icon>photo_camera</mat-icon>
+          <span>Промяна</span>
+        </div>
+      </div>
+      <input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="image/*">
+
+      <text-input [formControl]="$any(profileForm.controls['username'])"
+                  [label]="'Потребителско име'"
+                  [type]="'username'"
+                  [hint]="'Потребителското име не може да бъде променяно'"></text-input>
+      <text-input [formControl]="$any(profileForm.controls['name'])"
+                  [label]="'Име'"
+                  [type]="'text'"
+                  [hint]="'Моля въведете валидно име'"></text-input>
+      <text-input [formControl]="$any(profileForm.controls['email'])"
+                  [label]="'Имейл'"
+                  [type]="'email'"
+                  [hint]="'Моля въведете валиден имейл'"></text-input>
+      <select-input [formControl]="$any(profileForm.controls['gender'])"
+                    [label]="'Пол'"
+                    [options]="genderOptions"
+                    [hint]="'Моля изберете пол'"></select-input>
+      <date-picker [formControl]="$any(profileForm.controls['dateOfBirth'])"
+                   [label]="'Дата на раждане'"
+                   [maxDate]="maxDate"
+                   [minDate]="minDate"
+                   [hint]="'MM/DD/YYYY'"></date-picker>
+      <button mat-flat-button color="primary" type="submit" [disabled]="profileForm.invalid">
+        Запази промените
+      </button>
+    </form>
+  }
+</div>

@@ -1,0 +1,116 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: space-between;
+}
+
+.app-header {
+  background-color: #e7c8f8;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px 0;
+  height: 50px;
+
+  .logo {
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #a900a9;
+    }
+  }
+
+  .main-nav {
+    a {
+      font-size: 1rem;
+    }
+
+    .active {
+      color: #a900a9;
+      font-weight: bold;
+    }
+  }
+}
+
+.avatar {
+  color: #6c757d;
+  font-size: 34px;
+  height: 34px;
+  width: 34px;
+}
+
+.menu-icon {
+  color: #a900a9;
+}
+
+.avatar-button {
+  height: 50px;
+  width: 50px;
+}
+
+.avatar-image {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 34px;
+  width: 34px;
+}
+
+mat-icon.admin-icon {
+  color: #a900a9;
+}
+
+.admin-label {
+  font-weight: 600;
+  color: #a900a9;
+}
+
+@media (min-width: 819px) {
+  .under-sm {
+    display: none;
+  }
+}
+
+@media (max-width: 819px) {
+  .over-sm {
+    display: none;
+  }
+
+  .app-header .logo h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 340px) {
+  .app-header .logo h1 {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 290px) {
+  .app-header .logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .avatar {
+    font-size: 26px;
+    height: 26px;
+    width: 26px;
+  }
+
+  .avatar-button {
+    height: 42px;
+    width: 42px;
+  }
+
+  .avatar-image {
+    height: 26px;
+    width: 26px;
+  }
+}

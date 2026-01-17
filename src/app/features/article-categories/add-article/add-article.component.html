@@ -1,0 +1,151 @@
+@if(articleStore.loading()){
+<div class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+} @else if (!articleStore.loading() && (isEditMode() && articleStore.selectedArticle()) || !isEditMode()) {
+<div class="add-article-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>{{ isEditMode() ? 'Редактиране на статия' : 'Добавяне на нова статия' }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="articleForm"
+                  (ngSubmit)="onSubmit()">
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Категория:</mat-label>
+                    <mat-select formControlName="category"
+                                required>
+                        @for (category of articleStore.categories(); track category.id) {
+                        <mat-option [value]="category.id">{{ category.name }}</mat-option>
+                        }
+                    </mat-select>
+                    <mat-hint>Изберете категория</mat-hint>
+                    @if(articleForm.get('category')?.hasError('required')){
+                    <mat-error>Моля изберете Категория</mat-error>
+                    }
+                </mat-form-field>
+
+                <text-input [formControl]="$any(articleForm.controls['name'])"
+                            [label]="'Заглавие'"
+                            [type]="'text'"
+                            [hint]="'Моля въведете заглавие'"></text-input>
+
+                <textarea-input [formControl]="$any(articleForm.controls['description'])"
+                                [label]="'Описание'"
+                                [hint]="'Моля въведете описание'"
+                                [rows]="3"></textarea-input>
+
+                <div class="form-array-container"
+                     formArrayName="paragraphs">
+                    <h3>Параграфи</h3>
+                    @for (paragraph of paragraphs.controls; track $index) {
+                    <div [formGroupName]="$index"
+                         class="paragraph-row">
+                        <div class="paragraph-content">
+                            <text-input [formControl]="$any(paragraph.get('title'))"
+                                        [label]="'Заглавие'"
+                                        [type]="'text'"
+                                        [hint]="'Моля въведете заглавие на Параграф ' + ($index + 1) + ' (опционално)'"></text-input>
+                            <textarea-input [formControl]="$any(paragraph.get('text'))"
+                                            [label]="'Параграф ' + ($index + 1)"
+                                            [hint]="'Въведете текст на параграфа'"
+                                            [rows]="5"></textarea-input>
+
+                            <div class="paragraph-image-upload">
+                                <label>Снимка (опционално):</label>
+                                <input type="file"
+                                       #paragraphFileInput
+                                       (change)="onParagraphImageSelected($event, $index)"
+                                       accept="image/*"
+                                       style="display: none;">
+
+                                <button mat-raised-button
+                                        color="primary"
+                                        type="button"
+                                        (click)="paragraphFileInput.click()">
+                                    <mat-icon>upload</mat-icon>
+                                    Избери файл
+                                </button>
+
+                                @if (paragraph.get('imagePreview')?.value) {
+                                <div class="image-preview">
+                                    <img [src]="paragraph.get('imagePreview')?.value"
+                                         alt="Paragraph Image Preview"
+                                         class="preview-image">
+                                    <button mat-icon-button
+                                            color="warn"
+                                            (click)="removeParagraphImage($index)"
+                                            type="button"
+                                            title="Премахни снимка">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <button mat-icon-button
+                                color="warn"
+                                class="remove-paragraph-btn"
+                                (click)="removeParagraph($index)"
+                                type="button"
+                                title="Премахни параграф">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    }
+                    <button mat-stroked-button
+                            color="primary"
+                            (click)="addParagraph()"
+                            class="add-ph-btn"
+                            type="button">Добави параграф
+                        <mat-icon>add</mat-icon>
+                    </button>
+                </div>
+
+                <div class="main-image-upload">
+                    <label>Основна снимка на статията:*</label>
+                    <p class="upload-hint">Моля добавете основна снимка</p>
+                    <input type="file"
+                           #fileInput
+                           (change)="onMainImageSelected($event)"
+                           accept="image/*"
+                           style="display: none;">
+
+                    <button mat-raised-button
+                            color="primary"
+                            type="button"
+                            (click)="fileInput.click()">
+                        <mat-icon>upload</mat-icon>
+                        Избери файл
+                    </button>
+
+                    @if (mainImagePreview) {
+                    <div class="image-preview">
+                        <img [src]="mainImagePreview"
+                             alt="Article Main Image Preview"
+                             class="preview-image">
+                        <button mat-icon-button
+                                color="warn"
+                                (click)="removeMainImage()"
+                                type="button"
+                                title="Премахни снимка">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </div>
+                    }
+                </div>
+
+                <button mat-raised-button
+                        color="primary"
+                        type="submit"
+                        [disabled]="!articleForm.valid">
+                    {{ isEditMode() ? 'Редактиране на статия' : 'Добавяне на нова статия' }}
+                </button>
+
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
+}

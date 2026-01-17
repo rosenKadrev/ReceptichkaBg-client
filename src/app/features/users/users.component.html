@@ -1,0 +1,175 @@
+<div class="container">
+  @if(userStore.loading()){
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  } @else if(!userStore.loading()) {
+  <div class="table-scroll-container">
+    <table mat-table
+           [dataSource]="userStore.users()"
+           multiTemplateDataRows>
+      @for (column of columnsToDisplay; track column) {
+      <ng-container matColumnDef="{{column}}">
+        <th mat-header-cell
+            *matHeaderCellDef>{{ getColumnLabel()(column) }}
+          @if(column !== 'actions') {
+          <mat-icon class="sort-icon"
+                    (click)="toggleSortOrder(column); $event.stopPropagation()"
+                    [class.active-sort]="userStore.params().sortBy === column"
+                    [matTooltip]="getSortTooltip(column)"
+                    matTooltipPosition="above">
+            @if(userStore.params().sortBy === column) {
+            {{ userStore.params().sortOrder === 'asc' ? 'arrow_upward' : 'arrow_downward' }}
+            } @else {
+            arrow_downward
+            }
+          </mat-icon>
+          } @else {
+          <mat-icon class="sort-icon disabled-icon">arrow_downward</mat-icon>
+          }
+          @if(column === 'name') {
+          <mat-form-field appearance="outline"
+                          class="header-filter"
+                          [style.max-width.px]="getHeaderFilterMaxWidthPx(column)">
+            <input matInput
+                   [placeholder]="getColumnLabel()(column)"
+                   [value]="userStore.params().name"
+                   (input)="onSearchChange(column,$event.target.value)" />
+          </mat-form-field>
+          }
+          @if(column === 'email') {
+          <mat-form-field appearance="outline"
+                          class="header-filter"
+                          [style.max-width.px]="getHeaderFilterMaxWidthPx(column)">
+            <input matInput
+                   [placeholder]="getColumnLabel()(column)"
+                   [value]="userStore.params().email"
+                   (input)="onSearchChange(column,$event.target.value)" />
+          </mat-form-field>
+          }
+          @if(column === 'gender') {
+          <mat-form-field appearance="outline"
+                          class="header-filter"
+                          [style.max-width.px]="getHeaderFilterMaxWidthPx(column)">
+            <mat-select [value]="userStore.params().gender"
+                        (selectionChange)="onGenderChange($event.value)">
+              <mat-option value="">Всички</mat-option>
+              <mat-option value="male">Мъж</mat-option>
+              <mat-option value="female">Жена</mat-option>
+            </mat-select>
+          </mat-form-field>
+          }
+          @if(column === 'dateCreated') {
+          <mat-form-field appearance="outline"
+                          class="header-filter"
+                          [style.max-width.px]="getHeaderFilterMaxWidthPx(column)">
+            <mat-label>Период</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate
+                     placeholder="От дата"
+                     [value]="dateRange.start"
+                     (dateChange)="onDateRangeChange($event)" />
+              <input matEndDate
+                     placeholder="До дата"
+                     [value]="dateRange.end"
+                     (dateChange)="onDateRangeChange($event)" />
+            </mat-date-range-input>
+            <mat-datepicker-toggle matSuffix
+                                   [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+          </mat-form-field>
+          }
+          @if(column === 'role') {
+          <mat-form-field appearance="outline"
+                          class="header-filter"
+                          [style.max-width.px]="getHeaderFilterMaxWidthPx(column)">
+            <mat-select [value]="userStore.params().role"
+                        (selectionChange)="onRoleChange($event.value)">
+              <mat-option value="">Всички</mat-option>
+              <mat-option value="superAdmin">Супер администратор</mat-option>
+              <mat-option value="admin">Администратор</mat-option>
+              <mat-option value="user">Потребител</mat-option>
+            </mat-select>
+          </mat-form-field>
+          }
+          @if (column === 'actions') {
+          <mat-form-field appearance="outline"
+                          class="header-filter"
+                          [style.max-width.px]="getHeaderFilterMaxWidthPx(column)">
+            <input matInput
+                   disabled
+                   placeholder="Дейстия" />
+          </mat-form-field>
+          }
+        </th>
+        @if(column == 'actions') {
+        <td mat-cell
+            *matCellDef="let element">
+          @if(userStore.isUserSuperAdmin() && element.role !== 'superAdmin' && element.role !== 'admin') {
+          <button mat-icon-button
+                  color="warn"
+                  (click)="onPromoteUserToAdmin(element.id); $event.stopPropagation()"
+                  title="Повиши потребител до администратор">
+            <mat-icon>add_moderator</mat-icon>
+          </button>
+          }
+          @if(userStore.isUserSuperAdmin() && element.role !== 'superAdmin' && element.role !== 'user') {
+          <button mat-icon-button
+                  color="warn"
+                  (click)="onDemoteAdminToUser(element.id); $event.stopPropagation()"
+                  title="Понижи администратор до потребител">
+            <mat-icon>remove_moderator</mat-icon>
+          </button>
+          }
+          @if((userStore.isUserSuperAdmin() && element.role !== 'superAdmin') || (userStore.isUserAdmin() &&
+          element.role === 'user')) {
+          <button mat-icon-button
+                  color="warn"
+                  (click)="onDeleteUser(element.id); $event.stopPropagation()"
+                  title="Изтрий потребител">
+            <mat-icon>delete</mat-icon>
+          </button>
+          }
+        </td>
+        } @else if(column == 'gender') {
+        <td mat-cell
+            *matCellDef="let element">{{ getGenderLabel()(element.gender) }}</td>
+        } @else if(column == 'role') {
+        <td mat-cell
+            *matCellDef="let element">{{ getRoleLabel()(element.role) }}</td>
+        } @else if(column == 'dateCreated') {
+        <td mat-cell
+            *matCellDef="let element">{{ element[column] | date:'MMM d, y h:mm a' }}</td>
+        } @else {
+        <td mat-cell
+            *matCellDef="let element">{{ element[column] }}
+        </td>
+        }
+      </ng-container>
+      }
+      <tr mat-header-row
+          *matHeaderRowDef="columnsToDisplay"></tr>
+      <tr mat-row
+          *matRowDef="let row; columns: columnsToDisplay;"
+          class="element-row">
+      </tr>
+
+      <tr class="mat-row"
+          *matNoDataRow>
+        <td class="mat-cell no-data-cell"
+            colspan="6">Няма данни, отговарящи на филтрите.
+          <button matButton="filled"
+                  class="clear-filters-btn"
+                  (click)="onClearFilters()">Изчисти филтрите</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <mat-paginator [length]="userStore.totalResults()"
+                 [pageSize]="userStore.params().pageSize"
+                 [pageSizeOptions]="[5, 10, 15, 20]"
+                 [pageIndex]="userStore.params().currentPage - 1"
+                 (page)="onPageChange($event)"
+                 aria-label="Изберете страница"></mat-paginator>
+  }
+</div>

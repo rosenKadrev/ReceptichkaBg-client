@@ -1,0 +1,59 @@
+<div class="container">
+  @if(articleStore.loading()){
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  } @else if(!articleStore.loading()){
+  @if(articleStore.selectedArticle()){
+  <mat-card class="article-content">
+    <mat-card-header>
+      <mat-card-title>
+        <h1 class="article-title">{{ articleStore.selectedArticle()?.name }}</h1>
+      </mat-card-title>
+      <mat-card-subtitle>
+        <span class="category">{{ articleStore.selectedArticle()?.articleCategory?.name }}</span>
+        <span class="date">{{ articleStore.selectedArticle()?.createdAt | date:'dd.MM.yyyy' }}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p class="article-description">{{ articleStore.selectedArticle()?.description }}</p>
+      <div class="article-body">
+        @for (paragraph of articleStore.selectedArticle()?.paragraphs ?? []; track paragraph) {
+        <section class="article-paragraph">
+          <h2 class="paragraph-title">{{ paragraph.title }}</h2>
+          <p class="paragraph-description">{{ paragraph.description }}</p>
+          @if(paragraph.imageUrl){
+          <img [src]="paragraph.imageUrl"
+               alt="Paragraph image"
+               class="paragraph-image" />
+          }
+        </section>
+        }
+      </div>
+    </mat-card-content>
+    @if(userStore.isUserAdmin() || userStore.isUserSuperAdmin()){
+    <mat-card-actions>
+      <button mat-raised-button
+              color="primary"
+              (click)="onEditArticle()">
+        <mat-icon>edit</mat-icon>
+        Редактиране
+      </button>
+      <button mat-raised-button
+              color="warn"
+              (click)="onDeleteArticle()">
+        <mat-icon>delete</mat-icon>
+        Изтриване
+      </button>
+    </mat-card-actions>
+    }
+  </mat-card>
+  } @else {
+  <mat-card>
+    <mat-card-content>
+      <p>Статията не е намерена.</p>
+    </mat-card-content>
+  </mat-card>
+  }
+  }
+</div>

@@ -1,0 +1,15 @@
+mat-sidenav {
+    height: 100%;
+    width: 240px;
+    background-color: #f8f9fa;
+}
+
+mat-sidenav-content {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+app-footer {
+    margin-top: auto;
+}

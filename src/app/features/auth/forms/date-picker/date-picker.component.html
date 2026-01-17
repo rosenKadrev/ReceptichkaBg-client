@@ -1,0 +1,21 @@
+<mat-form-field class="padding-y-5 w-100">
+  <mat-label>{{ label() }}:</mat-label>
+  <input
+    matInput
+    [formControl]="control"
+    [matDatepicker]="picker"
+    [max]="maxDate()"
+    [min]="minDate()"
+    placeholder="{{ label() }}"
+  />
+  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+  <mat-datepicker #picker></mat-datepicker>
+  <mat-hint>{{ hint() }}</mat-hint>
+  @if(control.hasError('matDatepickerMin')){
+  <mat-error> Моля избетете по-голяма {{ label() }}</mat-error>
+  } @if(control.hasError('matDatepickerMax')){
+  <mat-error>Моля избетете по-малка {{ label() }}</mat-error>
+  } @if(control.hasError('required')){
+  <mat-error>Моля изберете своята {{ label() }}</mat-error>
+  }
+</mat-form-field>

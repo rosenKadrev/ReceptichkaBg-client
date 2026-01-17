@@ -1,0 +1,11 @@
+<mat-form-field class="padding-y-5 w-100">
+  <mat-label>{{ label() }}:</mat-label>
+  <mat-select [formControl]="control">
+    <mat-option value="male">Мъж</mat-option>
+    <mat-option value="female">Жена</mat-option>
+  </mat-select>
+  <mat-hint>{{ hint() }}</mat-hint>
+  @if(control.hasError('required')){
+  <mat-error>Моля изберете {{ label() }}</mat-error>
+  }
+</mat-form-field>

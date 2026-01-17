@@ -1,0 +1,40 @@
+@if (userStore.loading()) {
+<div class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
+}
+@else {
+<section class="d-flex j-content-center section-padding">
+    <form [formGroup]="loginForm"
+          (ngSubmit)="onSubmit()"
+          class="login-form">
+        <text-input [formControl]="$any(loginForm.controls['email'])"
+                    [label]="'Имейл'"
+                    [type]="'email'"
+                    [hint]="'Моля въведете валиден имейл'"></text-input>
+        <text-input [formControl]="$any(loginForm.controls['password'])"
+                    [label]="'Парола'"
+                    [type]="'password'"
+                    [hint]="'Моля въведете вашата парола'"></text-input>
+        <div class="forgot-password-link">
+            <button type="button"
+                    mat-button
+                    color="primary"
+                    (click)="openForgotPasswordDialog()">
+                Забравена парола?
+            </button>
+        </div>
+        <button type="submit"
+                mat-raised-button
+                color="warn"
+                class="w-100 button-style"
+                [disabled]="!loginForm.valid">Вход
+        </button>
+        <div class="register-div d-flex j-content-center a-items-center">
+            <p class="register-text fs-14">Или нямате акаунт все още?</p>
+            <a class="register-link fs-18 fw-5 pl-10"
+               routerLink="/signup">Регистрирайте се!</a>
+        </div>
+    </form>
+</section>
+}

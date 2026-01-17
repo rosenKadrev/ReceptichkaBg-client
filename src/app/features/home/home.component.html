@@ -1,0 +1,47 @@
+@if(recipeStore.loading()){
+<div class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+} @else {
+<div class="container">
+  <div class="welcome">
+    <div class="welcome-content">
+      <h1>Добре дошли в РецептичкаБг</h1>
+      <p>Тук можете да намерите всички рецепти, които поискате.</p>
+      <a mat-flat-button
+         color="primary"
+         class="welcome-button"
+         routerLink="/recipes/all">Открий всички рецепти</a>
+    </div>
+  </div>
+
+  <div class="featured-recipes">
+    <h2>Избрани рецепти</h2>
+    <div class="recipe-grid">
+      @for (recipe of recipeStore.recipes(); track recipe.id) {
+      <a [routerLink]="['/recipes/all', recipe.id]"
+         class="recipe-card-link">
+        <mat-card class="recipe-card">
+          @if (recipe.images[0]) {
+          <img mat-card-image
+               [src]="recipe.images[0].imageUrl"
+               [alt]="recipe.name" />
+          } @else {
+          <div mat-card-image
+               class="recipe-image placeholder">
+            <span>Няма изображение</span>
+          </div>
+          }
+          <mat-card-header>
+            <mat-card-title class="recipe-title"
+                            [matTooltip]="recipe.name"
+                            matTooltipPosition="below">{{ recipe.name }}
+            </mat-card-title>
+          </mat-card-header>
+        </mat-card>
+      </a>
+      }
+    </div>
+  </div>
+</div>
+}

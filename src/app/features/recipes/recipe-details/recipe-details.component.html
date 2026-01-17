@@ -1,0 +1,138 @@
+<div class="recipe-details-container">
+  @if (recipeStore.loading()) {
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  } @else if (!recipeStore.loading() && recipeStore.selectedRecipe()) { @let recipe = recipeStore.selectedRecipe()!;
+  <mat-card class="recipe-card">
+    <div class="recipe-header">
+      @if ((recipe.images || []).length > 0) {
+      <img [src]="recipe.images![0].imageUrl"
+           [alt]="recipe.name"
+           class="recipe-image" />
+      } @else {
+      <div class="recipe-image-placeholder">
+        <mat-icon class="recipe-image-icon">restaurant_menu</mat-icon>
+        <span>Няма снимка</span>
+      </div>
+      }
+    </div>
+
+    <div class="recipe-content">
+      <div class="recipe-title-section">
+        <h1 class="recipe-title">{{ recipe.name }}</h1>
+        <div class="recipe-meta">
+          <span class="recipe-meta-item">
+            <mat-icon class="recipe-meta-icon">schedule</mat-icon>
+            {{ totalCookingTime() }} мин.
+          </span>
+          <span class="recipe-meta-item">
+            <mat-icon>restaurant</mat-icon>
+            {{ recipe.servings }} порции
+          </span>
+          <span class="recipe-meta-item status"
+                [class]="'status-' + recipe.status">
+            {{ getStatusText(recipe.status) }}
+          </span>
+        </div>
+      </div>
+
+      @if (segment() === 'all') {
+      <div class="recipe-creator">
+        <div class="creator-info">
+          <mat-icon class="creator-icon">person</mat-icon>
+          <span>Създадена от: <strong>{{ recipe.createdBy }}</strong></span>
+        </div>
+      </div>
+      }
+
+      <mat-divider></mat-divider>
+
+      <div class="section">
+        <h2>Описание</h2>
+        <p class="recipe-description">{{ recipe.description }}</p>
+      </div>
+
+      <div class="recipe-details-grid">
+        <div class="detail-item">
+          <h3>Категория</h3>
+          <p>{{ recipe.category }}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Тип обработка</h3>
+          <p>{{ recipe.typeOfProcessing }}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Трудност</h3>
+          <p>{{ recipe.degreeOfDifficulty }}</p>
+        </div>
+        <div class="detail-item">
+          <h3>Време за подготовка</h3>
+          <p>{{ recipe.prepTime }} минути</p>
+        </div>
+        <div class="detail-item">
+          <h3>Време за готвене</h3>
+          <p>{{ recipe.cookTime }} минути</p>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Съставки</h2>
+        <mat-chip-listbox>
+          @for (ingredient of recipe.ingredients; track $index) {
+          <mat-chip-option>
+            {{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}
+          </mat-chip-option>
+          }
+        </mat-chip-listbox>
+      </div>
+
+      <div class="section">
+        <h2>Начин на приготвяне</h2>
+        <ol class="instructions-list">
+          @for (instruction of recipe.instructions; track $index; let i = $index) {
+          <li>{{ instruction.description }}</li>
+          }
+        </ol>
+      </div>
+    </div>
+
+    @if (segment() === 'my') {
+    <div class="recipe-actions">
+      <button mat-raised-button
+              color="primary"
+              routerLink="/recipes/my">
+        <mat-icon>arrow_back</mat-icon>
+        Назад към списъка
+      </button>
+      <button mat-raised-button
+              color="accent"
+              [routerLink]="['/recipes/edit', recipe.id]">
+        <mat-icon>edit</mat-icon>
+        Редактирай
+      </button>
+    </div>
+    } @else {
+    <div class="recipe-actions">
+      <button mat-raised-button
+              color="primary"
+              routerLink="/recipes/all">
+        <mat-icon>arrow_back</mat-icon>
+        Назад към списъка
+      </button>
+    </div>
+    }
+  </mat-card>
+  } @else {
+  <div class="not-found">
+    <mat-icon class="not-found-icon">error_outline</mat-icon>
+    <h2>Рецептата не беше намерена</h2>
+    <button mat-raised-button
+            color="primary"
+            routerLink="/recipes/my">
+      <mat-icon>arrow_back</mat-icon>
+      Назад към списъка
+    </button>
+  </div>
+  }
+</div>

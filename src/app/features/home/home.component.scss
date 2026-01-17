@@ -1,0 +1,140 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 8px;
+}
+
+.welcome {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url('https://vyywowzscsyjgtjwxznp.supabase.co/storage/v1/object/public/receptichka_bg/wallpaper.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 80px 20px;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+
+  .welcome-content {
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      line-height: 1.1;
+    }
+
+    p {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      line-height: 1.1;
+    }
+  }
+
+  .welcome-button {
+    font-size: 16px;
+  }
+}
+
+.featured-recipes {
+  h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+
+  .recipe-card-link {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .recipe-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  img[mat-card-image],
+  .recipe-image.placeholder {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .recipe-image.placeholder {
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6c757d;
+  }
+
+  .recipe-title {
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+    line-height: 1.2;
+    display: -webkit-box;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-height: 3.2em;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 2vw;
+  }
+
+  .welcome {
+    padding: 28px 4px;
+    margin-top: 18px;
+    margin-bottom: 24px;
+
+    .welcome-content {
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      p {
+        font-size: 0.95rem;
+        margin-bottom: 18px;
+      }
+    }
+
+    .welcome-button {
+      font-size: 12px;
+    }
+  }
+
+  .featured-recipes {
+    h2 {
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+
+    .recipe-grid {
+      gap: 10px;
+      grid-template-columns: 1fr;
+      margin-bottom: 20px;
+    }
+
+    .recipe-title {
+      font-size: 0.95rem;
+    }
+
+    img[mat-card-image],
+    .recipe-image.placeholder {
+      height: 120px;
+    }
+  }
+}

@@ -1,0 +1,213 @@
+@if(recipeStore.loading()){
+<div class="spinner-container">
+  <mat-spinner></mat-spinner>
+</div>
+} @else if (!recipeStore.loading() && (isEditMode() && recipeStore.selectedRecipe()) || !isEditMode()) {
+<div class="add-recipe-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ isEditMode() ? 'Редактиране на рецепта' : 'Добавяне на нова рецепта' }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="recipeForm"
+            (ngSubmit)="onSubmit()">
+        <text-input [formControl]="$any(recipeForm.controls['name'])"
+                    [label]="'Име'"
+                    [type]="'name'"
+                    [hint]="'Моля въведете име'"></text-input>
+
+        <textarea-input [formControl]="$any(recipeForm.controls['description'])"
+                        [label]="'Описание'"
+                        [hint]="'Моля въведете описание'"
+                        [rows]="2"></textarea-input>
+
+        <div class="form-array-container"
+             formArrayName="ingredients">
+          <h3>Съставки</h3>
+          @for (ingredient of ingredients.controls; track $index) {
+          <div [formGroupName]="$index"
+               class="dynamic-row">
+            <mat-form-field appearance="outline"
+                            class="ingredient-name">
+              <mat-label>Съставка:</mat-label>
+              <input matInput
+                     formControlName="name"
+                     required>
+              <mat-hint>Име на съставката</mat-hint>
+              @if(ingredient.get('name')?.hasError('required')){
+              <mat-error>Моля въведете Съставка</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+                            class="ingredient-quantity">
+              <mat-label>Количество:</mat-label>
+              <input matInput
+                     type="number"
+                     formControlName="quantity"
+                     required>
+              <mat-hint>Количество</mat-hint>
+              @if(ingredient.get('quantity')?.hasError('required')){
+              <mat-error>Моля въведете Количество</mat-error>
+              }
+            </mat-form-field>
+            <mat-form-field appearance="outline"
+                            class="ingredient-unit">
+              <mat-label>Мерна единица:</mat-label>
+              <input matInput
+                     formControlName="unit"
+                     required>
+              <mat-hint>Мерна ед.</mat-hint>
+              @if(ingredient.get('unit')?.hasError('required')){
+              <mat-error>Моля въведете Мерна единица</mat-error>
+              }
+            </mat-form-field>
+            <button mat-icon-button
+                    color="warn"
+                    class="mb-20"
+                    (click)="removeIngredient($index)"
+                    type="button"
+                    title="Премахни съставка">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+          <button mat-stroked-button
+                  color="primary"
+                  (click)="addIngredient()"
+                  type="button">Добави съставка
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <div class="form-array-container"
+             formArrayName="instructions">
+          <h3>Инструкции</h3>
+          @for (instruction of instructions.controls; track $index) {
+          <div class="dynamic-row"
+               [formGroupName]="$index">
+            <textarea-input [formControl]="$any(instruction.get('instruction'))"
+                            [label]="'Стъпка ' + ($index + 1)"
+                            [hint]="'Опишете стъпката подробно'"
+                            [rows]="3"></textarea-input>
+            <button mat-icon-button
+                    color="warn"
+                    class="mb-20"
+                    (click)="removeInstruction($index)"
+                    type="button"
+                    title="Премахни стъпка">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+          <button mat-stroked-button
+                  color="primary"
+                  (click)="addInstruction()"
+                  type="button">Добави стъпка
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+
+        <div class="category-processing-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Категория:</mat-label>
+            <mat-select formControlName="category"
+                        required>
+              @for (category of recipeStore.lookups()?.categories; track category.id) {
+              <mat-option [value]="category.id">{{ category.name }}</mat-option>
+              }
+            </mat-select>
+            <mat-hint>Изберете категория</mat-hint>
+            @if(recipeForm.get('category')?.hasError('required')){
+            <mat-error>Моля изберете Категория</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Тип обработка:</mat-label>
+            <mat-select formControlName="typeOfProcessing"
+                        required>
+              @for (processingType of recipeStore.lookups()?.processingTypes; track processingType.id) {
+              <mat-option [value]="processingType.id">{{ processingType.name }}</mat-option>
+              }
+            </mat-select>
+            <mat-hint>Изберете тип обработка</mat-hint>
+            @if(recipeForm.get('typeOfProcessing')?.hasError('required')){
+            <mat-error>Моля изберете Тип обработка</mat-error>
+            }
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Степен на трудност:</mat-label>
+            <mat-select formControlName="degreeOfDifficulty"
+                        required>
+              @for (difficulty of recipeStore.lookups()?.degreeOfDifficulty; track difficulty.id) {
+              <mat-option [value]="difficulty.id">{{ difficulty.name }}</mat-option>
+              }
+            </mat-select>
+            <mat-hint>Изберете степен на трудност</mat-hint>
+            @if(recipeForm.get('degreeOfDifficulty')?.hasError('required')){
+            <mat-error>Моля изберете Степен на трудност</mat-error>
+            }
+          </mat-form-field>
+        </div>
+
+        <div class="time-servings">
+          <text-input [formControl]="$any(recipeForm.controls['prepTime'])"
+                      [label]="'Време за подготовка'"
+                      [type]="'number'"
+                      [hint]="'Време в минути'"></text-input>
+          <text-input [formControl]="$any(recipeForm.controls['cookTime'])"
+                      [label]="'Време за готвене'"
+                      [type]="'number'"
+                      [hint]="'Време в минути'"></text-input>
+          <text-input [formControl]="$any(recipeForm.controls['servings'])"
+                      [label]="'Порции'"
+                      [type]="'number'"
+                      [hint]="'Брой порции'"></text-input>
+        </div>
+
+        <div class="image-upload">
+          <label>Снимка на рецептата:*</label>
+          <p class="upload-hint">Моля добавете снимка на готовото ястие</p>
+          <input type="file"
+                 #fileInput
+                 (change)="onFileSelected($event)"
+                 accept="image/*"
+                 style="display: none;">
+
+          <button mat-raised-button
+                  color="primary"
+                  type="button"
+                  (click)="fileInput.click()">
+            <mat-icon>upload</mat-icon>
+            Избери файл
+          </button>
+
+          @if (imagePreview) {
+          <div class="image-preview">
+            <img [src]="imagePreview"
+                 alt="Recipe Preview"
+                 class="preview-image">
+            <button mat-icon-button
+                    color="warn"
+                    (click)="removeImage()"
+                    type="button"
+                    title="Премахни снимка">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          }
+        </div>
+
+        <button mat-raised-button
+                color="primary"
+                type="submit"
+                [disabled]="!recipeForm.valid">
+          {{ isEditMode() ? 'Редактиране на рецепта' : 'Добавяне на нова рецепта' }}
+        </button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+}

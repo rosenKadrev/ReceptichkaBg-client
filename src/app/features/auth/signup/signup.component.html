@@ -1,0 +1,48 @@
+@if (userStore.loading()) {
+    <div class="spinner-container">
+        <mat-spinner></mat-spinner>
+    </div>
+}
+@else {
+<section class="d-flex j-content-center section-padding">
+    <form [formGroup]="signupForm"
+          (ngSubmit)="onSubmit()"
+          class="signup-form">
+        <text-input [formControl]="$any(signupForm.controls['username'])"
+                    [label]="'Потребителско име'"
+                    [type]="'username'"
+                    [hint]="'Моля въведете валидно потребителско име'"></text-input>
+        <text-input [formControl]="$any(signupForm.controls['name'])"
+                    [label]="'Име'"
+                    [type]="'text'"
+                    [hint]="'Моля въведете валидно име'"></text-input>
+        <text-input [formControl]="$any(signupForm.controls['email'])"
+                    [label]="'Имейл'"
+                    [type]="'email'"
+                    [hint]="'Моля въведете валиден имейл'"></text-input>
+        <select-input [formControl]="$any(signupForm.controls['gender'])"
+                      [label]="'Пол'"
+                      [options]="genderOptions"
+                      [hint]="'Моля изберете пол'"></select-input>
+        <date-picker [formControl]="$any(signupForm.controls['dateOfBirth'])"
+                     [label]="'Дата на раждане'"
+                     [maxDate]="maxDate"
+                     [minDate]="minDate"
+                     [hint]="'MM/DD/YYYY'"></date-picker>
+        <text-input [formControl]="$any(signupForm.controls['password'])"
+                    [label]="'Парола'"
+                    [type]="'password'"
+                    [hint]="'Моля въведете парола'"></text-input>
+        <text-input [formControl]="$any(signupForm.controls['confirmPassword'])"
+                    [label]="'Потвърждаване на паролата'"
+                    [type]="'password'"
+                    [hint]="'Моля потвърдете паролата'"></text-input>
+        <button type="submit"
+                mat-raised-button
+                color="primary"
+                class="w-100 button-style"
+                [disabled]="!signupForm.valid">Регистрирай ме
+        </button>
+    </form>
+</section>
+}

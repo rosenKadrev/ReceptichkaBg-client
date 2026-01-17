@@ -1,0 +1,38 @@
+<div class="container">
+  @if(articleStore.loading()){
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  }@else if(!articleStore.loading()){
+  <div class="categories-header">
+    <h1>Статии</h1>
+    <p class="description">
+      В РецептичкаБг ще намериш хиляди авторски статии от света на кулинарията.
+    </p>
+  </div>
+  <div class="categories-grid">
+    @for (category of articleStore.categories(); track category.id) {
+    <mat-card class="category-card"
+              [class.disabled]="category.articlesCount == 0"
+              [routerLink]="['/article-categories', category.id]">
+      <div class="image-container">
+        <img [src]="category.imageUrl"
+             [alt]="category.name" />
+        <div class="overlay"></div>
+      </div>
+      <div class="category-content">
+        <h3>{{ category.name }}</h3>
+        <p>{{ category.articlesCount }} {{ category.articlesCount == 1 ? 'статия' : 'статии' }}</p>
+      </div>
+    </mat-card>
+    }
+    @if (articleStore.categories().length === 0) {
+    <mat-card class="no-articles">
+      <mat-card-content>
+        <p>Все още няма категории.</p>
+      </mat-card-content>
+    </mat-card>
+    }
+  </div>
+  }
+</div>

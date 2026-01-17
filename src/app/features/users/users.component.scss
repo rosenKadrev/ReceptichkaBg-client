@@ -1,0 +1,86 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    --mat-form-field-container-height: 36px;
+    --mat-form-field-container-vertical-padding: 8px;
+    --mat-form-field-outlined-focus-outline-width: 1px;
+}
+
+.table-scroll-container {
+    max-height: 70vh;
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(169, 0, 169, 0.08), 0 1.5px 6px rgba(0, 0, 0, 0.04);
+    padding: 12px;
+}
+
+table {
+    width: 100%;
+    overflow: hidden;
+}
+
+tr.element-row {
+    cursor: default;
+}
+
+tr.element-row:hover {
+    background-color: #f1e7f1;
+}
+
+.element-row td {
+    border-bottom-width: 0;
+}
+
+.header-filter {
+    margin-top: 6px;
+    margin-bottom: 0;
+}
+
+.mat-row {
+    text-align: center;
+}
+
+.mat-cell {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 16px;
+}
+
+.no-data-cell {
+    text-align: center;
+    font-size: 1.1rem;
+    padding: 24px 0;
+}
+
+.active-sort {
+    color: #a900a9;
+    font-weight: bold;
+}
+
+.sort-icon {
+    cursor: pointer;
+    vertical-align: middle;
+    font-size: 20px;
+    margin-left: 4px;
+}
+
+.disabled-icon {
+    color: rgba(0, 0, 0, 0.26);
+    cursor: default;
+}
+
+.clear-filters-btn {
+    margin-left: 16px;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 8px;
+    }
+
+    .table-scroll-container {
+        padding: 4px;
+    }
+}

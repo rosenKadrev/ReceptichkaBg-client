@@ -1,0 +1,82 @@
+<header class="app-header">
+  <div class="container">
+    <button mat-icon-button
+            class="under-sm"
+            (click)="onToggleSidenav()">
+      <mat-icon class="menu-icon">menu</mat-icon>
+    </button>
+    <div class="logo">
+      <a routerLink="/">
+        <h1>РецептичкаБг</h1>
+      </a>
+    </div>
+    <div class="main-nav-wrapper over-sm">
+      <nav class="main-nav">
+        <a mat-button
+           routerLink="/recipes/all"
+           routerLinkActive="active"
+           [routerLinkActiveOptions]="{exact: true}">Всички рецепти</a>
+        <a mat-button
+           routerLink="/article-categories"
+           routerLinkActive="active">Статии</a>
+        @if(userStore.isLoggedIn()) {
+        <a mat-button
+           routerLink="/recipes/add"
+           routerLinkActive="active">Добави рецепта</a>
+        <a mat-button
+           routerLink="/recipes/my"
+           routerLinkActive="active">Моите рецепти</a>
+        }
+      </nav>
+    </div>
+    <div class="user-menu">
+      @if(userStore.isLoggedIn()) {
+      <button mat-icon-button
+              class="avatar-button"
+              [matMenuTriggerFor]="userMenu">
+        @if (userStore.user()?.avatarUrl) {
+        <img [src]="userStore.user()?.avatarUrl"
+             class="avatar-image"
+             alt="User Avatar">
+        } @else {
+        <mat-icon class="avatar">account_circle</mat-icon>
+        }
+      </button>
+      <mat-menu #userMenu="matMenu">
+        @if(userStore.user()?.role === 'admin' || userStore.user()?.role === 'superAdmin') {
+        <button mat-menu-item
+                routerLink="/recipes/admin">
+          <mat-icon class="admin-icon">folder_managed</mat-icon>
+          <span class="admin-label">Одобри рецепти</span>
+        </button>
+        <button mat-menu-item
+                routerLink="/users">
+          <mat-icon class="admin-icon">manage_accounts</mat-icon>
+          <span class="admin-label">Одобри потребители</span>
+        </button>
+        <button mat-menu-item
+                routerLink="/add-article">
+          <mat-icon class="admin-icon">article</mat-icon>
+          <span class="admin-label">Добави статия</span>
+        </button>
+        }
+        <button mat-menu-item
+                routerLink="/profile/{{userStore.user()?.id}}">
+          <mat-icon>settings</mat-icon>
+          <span>Настройки</span>
+        </button>
+        <button mat-menu-item
+                (click)="logout()">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>Изход</span>
+        </button>
+      </mat-menu>
+      } @else {
+      <button mat-flat-button
+              class="over-sm"
+              color="primary"
+              routerLink="/login">Вход</button>
+      }
+    </div>
+  </div>
+</header>

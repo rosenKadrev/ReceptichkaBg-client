@@ -1,0 +1,26 @@
+<mat-form-field class="padding-y-5 w-100">
+  <mat-label>{{ label() }}:</mat-label>
+  <textarea matInput [formControl]="control" placeholder="{{ label() }}" [rows]="rows()"></textarea>
+  <mat-hint>{{ hint() }}</mat-hint>
+  @if(control.hasError('maxlength')){
+  <mat-error>{{ label() }} трябва да е най-много
+    {{control.errors?.['maxlength'].requiredLength}} символа</mat-error>
+  } 
+  @if(control.hasError('isMatching')){
+  <mat-error>Паролие не съвпадат</mat-error>
+  } 
+  @if(control.hasError('minlength')){
+  <mat-error>{{ label() }} трябва да е най-малко
+    {{control.errors?.['minlength'].requiredLength}} символа</mat-error>
+  }
+  @if(control.hasError('required')){
+  <mat-error>Моля въведете {{ label() }}</mat-error>
+  } 
+  @if(control.hasError('email')){
+  <mat-error>Моля въведете валиден {{ label() }}</mat-error>
+  }
+  @if(control.hasError('pattern')){
+  <mat-error>Моля въведете валидно {{ label() }}</mat-error>
+  }
+
+</mat-form-field>

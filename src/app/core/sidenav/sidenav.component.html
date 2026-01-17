@@ -1,0 +1,45 @@
+<mat-nav-list>
+    <a mat-list-item
+       routerLink="/recipes/all"
+       (click)="onClose()">
+        <div class="d-flex a-items-center">
+            <mat-icon class="mat-list-icon">article</mat-icon>
+            <span class="mat-list-span">Всички рецепти</span>
+        </div>
+    </a>
+    <a mat-list-item
+       routerLink="/article-categories"
+       (click)="onClose()">
+        <div class="d-flex a-items-center">
+            <mat-icon class="mat-list-icon">auto_stories</mat-icon>
+            <span class="mat-list-span">Статии</span>
+        </div>
+    </a>
+    @if(userStore.isLoggedIn()) {
+    <a mat-list-item
+       routerLink="/recipes/add"
+       (click)="onClose()">
+        <div class="d-flex a-items-center">
+            <mat-icon class="mat-list-icon">add_circle</mat-icon>
+            <span class="mat-list-span">Добави рецепта</span>
+        </div>
+    </a>
+    <a mat-list-item
+       routerLink="/recipes/my"
+       (click)="onClose()">
+        <div class="d-flex a-items-center">
+            <mat-icon class="mat-list-icon">interests</mat-icon>
+            <span class="mat-list-span">Моите рецепти</span>
+        </div>
+    </a>
+    } @else {
+    <a mat-list-item
+       routerLink="/login"
+       (click)="onClose()">
+        <div class="d-flex a-items-center">
+            <mat-icon class="mat-list-icon">login</mat-icon>
+            <span class="mat-list-span">Вход</span>
+        </div>
+    </a>
+    }
+</mat-nav-list>

@@ -1,0 +1,56 @@
+<div class="container">
+  @if(articleStore.loading()){
+    <div class="spinner-container">
+      <mat-spinner></mat-spinner>
+    </div>
+  } @else if(!articleStore.loading()) {
+    <div class="category-header">
+      <h1 class="header">{{ articleStore.selectedCategory()?.name }}</h1>
+      <p class="category-description">{{ 'Съдържа ' + articleStore.totalResults() }} {{ articleStore.totalResults() == 1 ? 'статия' : 'статии' }}</p>
+    </div>
+
+    <div class="articles-list">
+      @for (article of articleStore.articles(); track article.id) {
+        <mat-card class="article-item" [routerLink]="['/article-categories', article.articleCategory.id, 'articles', article.id]" matRipple>
+          <div class="article-content">
+            <div class="article-image">
+              <img mat-card-image [src]="article.mainImageUrl || 'assets/images/placeholder.jpg'" [alt]="article.name">
+            </div>
+            <div class="article-details">
+              <mat-card-header>
+                <mat-card-title matTooltip="{{ article.name }}" matTooltipPosition="above" class="article-title">
+                  {{ article.name }}
+                </mat-card-title>
+                <mat-card-subtitle class="article-meta">
+                  <span class="date">
+                    <mat-icon>schedule</mat-icon>
+                    {{ article.createdAt | date:'dd.MM.yyyy' }}
+                  </span>
+                </mat-card-subtitle>
+              </mat-card-header>
+              <mat-card-content>
+                <p matTooltip="{{ article.description }}" class="article-excerpt">{{ article.description }}</p>
+              </mat-card-content>
+            </div>
+          </div>
+        </mat-card>
+      }
+      @if (articleStore.totalResults() === 0) {
+        <mat-card class="no-articles">
+          <mat-card-content>
+            <p>Все още няма публикувани статии в тази категория.</p>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+      <mat-paginator
+    class="pt-20"
+    [length]="articleStore.totalResults()"
+    [pageSize]="articleStore.params().pageSize"
+    [pageSizeOptions]="[5, 10, 15, 20]"
+    [pageIndex]="articleStore.params().currentPage - 1"
+    (page)="onPageChange($event)"
+    aria-label="Select page">
+  </mat-paginator>
+  }
+</div>

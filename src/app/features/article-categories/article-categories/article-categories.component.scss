@@ -1,0 +1,157 @@
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.categories-header {
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  .description {
+    font-size: 16px;
+    color: #6c757d;
+    max-width: 700px;
+    line-height: 1.2;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-header {
+    h1 {
+      font-size: 28px;
+    }
+
+    .description {
+      font-size: 14px;
+    }
+  }
+}
+
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  padding: 16px 0;
+}
+
+.category-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  overflow: hidden;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  padding-top: 75%;
+  overflow: hidden;
+
+  img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    transition: background 300ms ease;
+  }
+
+  &:hover {
+    img {
+      transform: scale(1.05);
+    }
+
+    .overlay {
+      background: rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.category-content {
+  padding: 16px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    line-height: 20.8px;
+  }
+
+  p {
+    margin: 0;
+    color: #666;
+    font-size: 14px;
+  }
+}
+
+.no-articles {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-size: 16px;
+  border-radius: 8px;
+  margin: 20px 0 0;
+  background: #f8f9fa;
+}
+
+.category-card.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .categories-grid {
+    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 300px) {
+  .categories-grid {
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+
+  .no-articles {
+    padding: 24px 16px;
+    font-size: 15px;
+  }
+}

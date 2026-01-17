@@ -1,0 +1,101 @@
+.not-found-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+  background-color: #f7fafc;
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+
+  .content {
+    .icon {
+      font-size: 8rem;
+      width: 8rem;
+      height: 8rem;
+      color: #a900a9;
+    }
+
+    .title {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #2d3748;
+      margin-top: 1rem;
+      line-height: normal;
+    }
+
+    .message {
+      font-size: 1.25rem;
+      color: #718096;
+      margin-top: 0.5rem;
+    }
+
+    .home-button {
+      margin-top: 1.5rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    min-height: 40vh;
+    padding: 15px;
+
+    .content {
+      .icon {
+        font-size: 6rem;
+        width: 6rem;
+        height: 6rem;
+      }
+
+      .title {
+        font-size: 2.5rem;
+      }
+
+      .message {
+        font-size: 1.125rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    min-height: 30vh;
+    padding: 10px;
+
+    .content {
+      .icon {
+        font-size: 4rem;
+        width: 4rem;
+        height: 4rem;
+      }
+
+      .title {
+        font-size: 2rem;
+      }
+
+      .message {
+        font-size: 1rem;
+      }
+
+      .home-button {
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  @media (max-width: 360px) {
+    .content {
+      .icon {
+        font-size: 3rem;
+        width: 3rem;
+        height: 3rem;
+      }
+
+      .title {
+        font-size: 1.5rem;
+      }
+
+      .message {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}

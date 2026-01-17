@@ -1,0 +1,158 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 48px;
+    border-radius: 18px;
+    min-height: 300px;
+    transition: box-shadow 0.3s;
+}
+
+.spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.article-content {
+    text-align: left;
+}
+
+.article-title {
+    color: #a900a9;
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #f3e1fa;
+    line-height: 1.1;
+}
+
+.article-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 0.95rem;
+    color: #888;
+    margin-bottom: 18px;
+    align-items: center;
+}
+
+.category {
+    background: #f3e1fa;
+    color: #a900a9;
+    padding: 2px 10px;
+    border-radius: 8px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.date {
+    font-style: italic;
+    color: #b47ac2;
+    padding-left: 10px;
+}
+
+.article-description {
+    font-size: 1.15rem;
+    color: #444;
+    margin-bottom: 18px;
+    font-style: italic;
+    background: #f8f9fa;
+    border-left: 4px solid #a900a9;
+    padding: 10px 16px;
+    border-radius: 6px;
+}
+
+.article-body {
+    margin-top: 10px;
+}
+
+.article-paragraph {
+    font-size: 1.13rem;
+    color: #222;
+    line-height: 1.7;
+    margin-bottom: 32px;
+    padding: 18px 16px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px rgba(169, 0, 169, 0.04);
+    border-left: 3px solid #a900a9;
+    transition: box-shadow 0.2s;
+}
+
+
+.paragraph-title {
+    font-size: 1.3rem;
+    color: #a900a9;
+    margin-bottom: 8px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+.paragraph-description {
+    margin-bottom: 12px;
+    line-height: 1.1;
+}
+
+.paragraph-image {
+    display: block;
+    max-width: 100%;
+    max-height: 600px;
+    margin: 16px auto 0 auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(169, 0, 169, 0.08);
+    transition: transform 0.2s;
+}
+
+mat-card-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 24px 4vw;
+    }
+
+    .article-title {
+        font-size: 1.2rem;
+    }
+
+    .article-description {
+        font-size: 1rem;
+    }
+
+    .category {
+        font-size: 0.85rem;
+        padding: 2px 8px;
+    }
+
+    .date {
+        font-size: 0.85rem;
+        padding-left: 6px;
+    }
+
+    .article-paragraph {
+        padding: 10px 4px;
+        font-size: 1rem;
+    }
+
+    .paragraph-title {
+        font-size: 1.1rem;
+    }
+
+    .paragraph-description {
+        font-size: 0.9rem;
+    }
+
+    mat-card-actions {
+        flex-direction: column;
+        gap: 12px;
+
+        button {
+            width: 100%;
+        }
+    }
+}
