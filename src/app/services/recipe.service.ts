@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataResponse, Recipe, RecipeFilters, RecipeLookups } from '../store/models/data.models';
+import { environment } from '../../config/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RecipeService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/recipes';
+  private apiUrl = environment.apiUrl + '/recipes';
 
   createRecipe(recipeData: FormData): Observable<DataResponse<Recipe>> {
     return this.http.post<DataResponse<Recipe>>(`${this.apiUrl}/add`, recipeData);

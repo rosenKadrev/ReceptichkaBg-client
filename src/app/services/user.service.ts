@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { DataResponse, User, UserFilters } from '../store/models/data.models';
+import { environment } from '../../config/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/users';
+  private apiUrl = environment.apiUrl + '/users';
 
   updateUser(userId: string, formData: FormData): Observable<DataResponse<User>> {
     return this.http.post<DataResponse<User>>(`${this.apiUrl}/${userId}`, formData);

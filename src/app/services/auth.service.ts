@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { AuthResponse, DataResponse, LoginRequest, User } from '../store/models/data.models';
+import { environment } from '../../config/env';
 
 
 @Injectable({
@@ -9,7 +10,7 @@ import { AuthResponse, DataResponse, LoginRequest, User } from '../store/models/
 })
 export class AuthService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/auth';
+  private apiUrl = environment.apiUrl + '/auth';
 
   login(loginRequest: LoginRequest): Observable<DataResponse<AuthResponse>> {
     return this.http.post<DataResponse<AuthResponse>>(`${this.apiUrl}/login`, loginRequest);

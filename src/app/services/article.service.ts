@@ -2,13 +2,14 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Article, ArticleCategory, DataResponse } from '../store/models/data.models';
+import { environment } from '../../config/env';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ArticleService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:3000/api/articles';
+  private apiUrl = environment.apiUrl + '/articles';
 
   getCategories(): Observable<DataResponse<ArticleCategory[]>> {
     return this.http.get<DataResponse<ArticleCategory[]>>(`${this.apiUrl}/article-categories`);
