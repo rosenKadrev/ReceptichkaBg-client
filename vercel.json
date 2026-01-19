@@ -1,6 +1,14 @@
 {
   "buildCommand": "ng build --configuration production",
   "outputDirectory": "dist/receptichkaBg-client/browser",
+  "git": {
+    "deploymentEnabled": {
+      "master": true
+    }
+  },
+  "github": {
+    "silent": true
+  },
   "routes": [
     {
       "handle": "filesystem"
