@@ -116,6 +116,7 @@
 }
 
 .no-articles {
+  grid-column: 1 / -1;
   text-align: center;
   padding: 40px 20px;
   color: #6c757d;

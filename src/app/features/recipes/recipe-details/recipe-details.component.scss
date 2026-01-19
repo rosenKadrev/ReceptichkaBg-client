@@ -13,13 +13,14 @@
 
 .recipe-header {
   position: relative;
-  max-height: 400px;
+  height: 400px;
   overflow: hidden;
 
   .recipe-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     display: block;
   }
 
@@ -41,9 +42,6 @@
     }
   }
 }
-
-
-
 
 .recipe-content {
   padding: 2rem;
@@ -237,13 +235,13 @@
   }
 
   .recipe-header {
-    max-height: 160px;
+    max-height: 220px;
     border-radius: 10px 10px 0 0;
     overflow: hidden;
 
     .recipe-image,
     .recipe-image-placeholder {
-      height: 160px;
+      height: 220px;
       min-height: 120px;
       object-fit: cover;
       border-radius: 10px 10px 0 0;

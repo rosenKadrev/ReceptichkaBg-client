@@ -12,8 +12,35 @@
     overflow-y: auto;
     overflow-y: auto;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(169, 0, 169, 0.08), 0 1.5px 6px rgba(0, 0, 0, 0.04);
+    box-shadow: 0 4px 24px rgba(169, 0, 169, 0.4), 0 2px 12px rgba(0, 0, 0, 0.2);
     padding: 12px;
+
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #a900a9;
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        background: #8a008a;
+    }
+
+    &::-webkit-scrollbar-corner {
+        background: #f1f1f1;
+        border-radius: 0 0 12px 0;
+    }
+}
+
+:host {
+    --mat-paginator-container-background-color: transparent;
 }
 
 table {
@@ -159,6 +186,11 @@ tr.element-row:hover {
 
     .table-scroll-container {
         padding: 4px;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
     }
 
     .expanded-columns>div {
