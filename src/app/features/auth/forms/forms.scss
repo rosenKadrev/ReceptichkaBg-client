@@ -7,3 +7,12 @@ mat-error,
 mat-hint {
     line-height: normal;
 }
+
+::ng-deep {
+  .mdc-floating-label {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+}
