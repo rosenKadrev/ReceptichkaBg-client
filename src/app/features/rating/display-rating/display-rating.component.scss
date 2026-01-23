@@ -1,0 +1,48 @@
+.rating-display {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    .stars {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+    }
+
+    .star-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &.filled {
+            color: #ffc107;
+        }
+
+        &.empty {
+            color: #e0e0e0;
+        }
+    }
+
+    .rating-value {
+        font-weight: 600;
+        font-size: 1rem;
+        color: #495057;
+    }
+
+    .rating-count {
+        font-size: 0.875rem;
+        color: #495057;
+    }
+}
+
+@media (max-width: 600px) {
+    .rating-display {
+        .rating-value {
+            font-size: 0.875rem;
+        }
+
+        .rating-count {
+            font-size: 0.75rem;
+        }
+    }
+}

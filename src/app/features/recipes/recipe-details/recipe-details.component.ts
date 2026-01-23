@@ -9,6 +9,9 @@ import { MatChipsModule } from '@angular/material/chips';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { RecipeStore } from '../../../store/recipe.store';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { StarRatingComponent } from '../../rating/star-rating/star-rating.component';
+import { DisplayRatingComponent } from '../../rating/display-rating/display-rating.component';
+import { UserStore } from '../../../store/user.store';
 
 @Component({
   selector: 'app-recipe-details',
@@ -22,6 +25,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatChipsModule,
     RouterModule,
     MatProgressSpinnerModule,
+    StarRatingComponent,
+    DisplayRatingComponent
   ],
   templateUrl: './recipe-details.component.html',
   styleUrls: ['./recipe-details.component.scss'],
@@ -29,6 +34,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class RecipeDetailsComponent {
   private route = inject(ActivatedRoute);
   public recipeStore = inject(RecipeStore);
+  public userStore = inject(UserStore);
   private router = inject(Router);
   public segment = signal<string>('');
   totalCookingTime = computed(() => {
@@ -42,13 +48,20 @@ export class RecipeDetailsComponent {
       this.segment.set(urlSegments[urlSegments.length - 2]);
       const id = params.get('id');
       if (id && this.segment()) {
-        this.recipeStore.loadRecipeDetails({id, segment: this.segment()})
+        this.recipeStore.loadRecipeDetails({ id, segment: this.segment() })
       }
     });
   }
 
   ngOnDestroy() {
     this.recipeStore.clearSelectedRecipe();
+  }
+
+  onRatingSubmit(rating: number): void {
+    const recipeId = this.recipeStore.selectedRecipe()?.id;
+    if (recipeId) {
+      this.recipeStore.rateRecipe({ recipeId, rating });
+    }
   }
 
   getStatusText(status: string): string {

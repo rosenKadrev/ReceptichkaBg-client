@@ -174,6 +174,13 @@
             <strong>Тип обработка:</strong> {{ recipe.typeOfProcessing }}
           </div>
           <div class="detail-item"><strong>Трудност:</strong> {{ recipe.degreeOfDifficulty }}</div>
+          <div class="detail-item d-flex align-items-center">
+            <strong>Оценка:</strong>
+            <app-display-rating [averageRating]="recipe?.rating?.averageRating || 0"
+                                [ratingCount]="recipe?.rating?.ratingCount || 0"
+                                size="small">
+            </app-display-rating>
+          </div>
         </div>
 
         <div class="recipe-meta">

@@ -1,0 +1,18 @@
+<div class="star-rating"
+     (mouseleave)="onMouseLeave()">
+    @for (star of stars(); track $index) {
+    <button mat-icon-button
+            [disabled]="readonly()"
+            class="star-button"
+            (click)="onStarClick(star)"
+            (mouseenter)="onStarHover(star)">
+        <mat-icon [style.fontSize]="getIconSize()"
+                  [style.width]="getIconSize()"
+                  [style.height]="getIconSize()"
+                  class="star-icon"
+                  [class.star-active]="(hoverRating() || rating()) >= star">
+            {{ getStarIcon(star) }}
+        </mat-icon>
+    </button>
+    }
+</div>
