@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { DataResponse, Recipe, RecipeFilters, RecipeLookups } from '../store/models/data.models';
+import { DataResponse, Rating, Recipe, RecipeFilters, RecipeLookups } from '../store/models/data.models';
 import { environment } from '../../config/env';
 
 @Injectable({
@@ -81,5 +81,12 @@ export class RecipeService {
 
   rejectRecipe(id: string): Observable<DataResponse<Recipe>> {
     return this.http.post<DataResponse<Recipe>>(`${this.apiUrl}/${id}/reject`, {});
+  }
+
+  rateRecipe(recipeId: string, rating: number): Observable<DataResponse<Rating>> {
+    return this.http.post<DataResponse<Rating>>(
+      `${this.apiUrl}/${recipeId}/rate`,
+      { rating }
+    );
   }
 }

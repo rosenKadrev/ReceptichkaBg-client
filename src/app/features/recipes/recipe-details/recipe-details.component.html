@@ -95,6 +95,68 @@
           }
         </ol>
       </div>
+
+      <div class="section">
+        <h2>Оценка</h2>
+        <div class=" rating-section">
+          <div class="rating-display-wrapper">
+            <app-display-rating [averageRating]="recipeStore.selectedRecipe()?.rating?.averageRating || 0"
+                                [ratingCount]="recipeStore.selectedRecipe()?.rating?.ratingCount || 0"
+                                [size]="'large'">
+            </app-display-rating>
+          </div>
+
+          @if (segment() === 'all') {
+          <mat-divider class="rating-divider"></mat-divider>
+
+          @if (userStore.isLoggedIn()) {
+          <div class="user-rating-card">
+            <div class="user-rating-header">
+              <mat-icon class="rating-icon">star_rate</mat-icon>
+              @if (recipeStore.selectedRecipe()?.rating?.userRating) {
+              <h3>Вашата оценка</h3>
+              } @else {
+              <h3>Оценете тази рецепта</h3>
+              }
+            </div>
+
+            @if (recipeStore.selectedRecipe()?.rating?.userRating) {
+            <p class="rating-subtitle">Можете да промените вашата оценка по всяко време</p>
+            } @else {
+            <p class="rating-subtitle">Вашето мнение е важно за нас!</p>
+            }
+
+            <app-star-rating [rating]="recipeStore.selectedRecipe()?.rating?.userRating || 0"
+                             [size]="'large'"
+                             (ratingChange)="onRatingSubmit($event)">
+            </app-star-rating>
+
+            @if (recipeStore.selectedRecipe()?.rating?.userRating) {
+            <div class="current-rating-info">
+              <mat-icon class="check-icon">check_circle</mat-icon>
+              <span>Вие оценихте с {{ recipeStore.selectedRecipe()?.rating?.userRating }} звезди</span>
+            </div>
+            }
+          </div>
+          }
+
+          @if (!userStore.isLoggedIn()) {
+          <div class="login-message-card">
+            <mat-icon class="info-icon">info</mat-icon>
+            <div class="login-message-content">
+              <p class="login-message-text">Моля, влезте в системата, за да оцените тази рецепта.</p>
+              <button mat-stroked-button
+                      color="primary"
+                      routerLink="/login">
+                <mat-icon>login</mat-icon>
+                Вход
+              </button>
+            </div>
+          </div>
+          }
+          }
+        </div>
+      </div>
     </div>
 
     @if (segment() === 'my') {

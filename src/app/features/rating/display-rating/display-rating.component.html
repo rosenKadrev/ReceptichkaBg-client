@@ -1,0 +1,30 @@
+<div class="rating-display">
+    <div class="stars">
+        @for (star of [].constructor(fullStars); track $index) {
+        <mat-icon [style.fontSize]="getIconSize()"
+                  [style.width]="getIconSize()"
+                  [style.height]="getIconSize()"
+                  class="star-icon filled">
+            star
+        </mat-icon>
+        }
+        @if (hasHalfStar) {
+        <mat-icon [style.fontSize]="getIconSize()"
+                  [style.width]="getIconSize()"
+                  [style.height]="getIconSize()"
+                  class="star-icon filled">
+            star_half
+        </mat-icon>
+        }
+        @for (star of [].constructor(emptyStars); track $index) {
+        <mat-icon [style.fontSize]="getIconSize()"
+                  [style.width]="getIconSize()"
+                  [style.height]="getIconSize()"
+                  class="star-icon empty">
+            star_border
+        </mat-icon>
+        }
+    </div>
+    <span class="rating-value">{{ averageRating().toFixed(1) }}</span>
+    <span class="rating-count">({{ ratingCount() }} {{ ratingCount() === 1 ? 'Оценка' : 'Оценки' }})</span>
+</div>

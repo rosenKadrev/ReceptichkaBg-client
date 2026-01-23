@@ -1,6 +1,8 @@
 # РецептичкаБг (ReceptichkaBg) 🍲
 
-A modern, full-stack web application for sharing and discovering authentic Bulgarian and worldwide recipes. Built with Angular and featuring a comprehensive recipe management system with user authentication, approval workflows, and community-driven content.
+A modern, full-stack web application for sharing and discovering authentic Bulgarian and worldwide recipes. Built with Angular and featuring a comprehensive recipe management system with user authentication, approval workflows, community-driven content, and recipe ratings.
+
+🌐 **Live:** [https://receptichkabg.vercel.app](https://receptichkabg.vercel.app)
 
 ## ✨ Features
 
@@ -19,6 +21,8 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 - ✔️ Recipe approval system for quality control
 - 📄 Detailed recipe views with ingredients and instructions
 - 🖼️ Image uploads for recipes
+- ⭐ Recipe rating system - Rate recipes and view average ratings
+- 📊 See how many users have rated each recipe
 
 ### 📰 Articles & Content
 
@@ -32,6 +36,7 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 - 👤 User profiles
 - 📚 Personal recipe collections
 - 🛠️ User management (admin functionality)
+- ⭐ Rate recipes and update ratings anytime
 
 ### 🎨 Modern UI/UX
 
@@ -39,6 +44,7 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 - 🧭 Clean and intuitive navigation
 - 🎨 Header, footer, and sidenav components
 - 📢 Toast notifications for user feedback
+- ⭐ Interactive star rating components
 
 ---
 
@@ -59,8 +65,9 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 
 1. **Register/Login** - Create an account or login
 2. **Browse Recipes** - Explore recipes from the community
-3. **Add Recipe** - Share your own recipes
-4. **Read Articles** - Discover cooking tips and articles
+3. **Rate Recipes** - Share your opinion by rating recipes (1-5 stars)
+4. **Add Recipe** - Share your own recipes
+5. **Read Articles** - Discover cooking tips and articles
 
 ### For Admins
 

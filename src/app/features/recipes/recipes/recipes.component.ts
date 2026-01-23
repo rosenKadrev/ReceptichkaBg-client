@@ -23,6 +23,7 @@ import { MatIcon } from '@angular/material/icon';
 import { RecipeFilters } from '../../../store/models/data.models';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { UserStore } from '../../../store/user.store';
+import { DisplayRatingComponent } from "../../rating/display-rating/display-rating.component";
 
 @Component({
   selector: 'app-recipes',
@@ -45,6 +46,7 @@ import { UserStore } from '../../../store/user.store';
     MatSelect,
     MatOption,
     MatIcon,
+    DisplayRatingComponent
   ],
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss'],
@@ -160,8 +162,6 @@ export class RecipesComponent {
   }
 
   onPageChange(event: PageEvent): void {
-  console.log(event);
-  
     this.recipeStore.setParams({
       ...this.recipeStore.params(),
       currentPage: event.pageIndex + 1,

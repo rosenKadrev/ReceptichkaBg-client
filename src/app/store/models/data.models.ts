@@ -47,6 +47,13 @@ export interface Recipe {
   instructions: Instruction[];
   images: Image[];
   createdBy: string;
+  rating: Rating;
+}
+
+export interface Rating {
+  averageRating: number;
+  ratingCount: number;
+  userRating: number;
 }
 
 export interface Ingredient {

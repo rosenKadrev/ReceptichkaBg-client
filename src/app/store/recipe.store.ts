@@ -338,6 +338,38 @@ export const RecipeStore = signalStore(
         )
       );
 
+      const rateRecipe = rxMethod<{ recipeId: string; rating: number }>(
+        pipe(
+          tap(() => patchState(store, { loading: true, error: null })),
+          switchMap(({ recipeId, rating }) =>
+            recipeService.rateRecipe(recipeId, rating).pipe(
+              tap((response) => {
+                const updatedRecipe = store.selectedRecipe();
+                if (updatedRecipe) {
+                  patchState(store, {
+                    selectedRecipe: {
+                      ...updatedRecipe,
+                      rating: response.data
+                    },
+                    loading: false,
+                  });
+                }
+                toastService.showSuccess(response.message);
+              }),
+              catchError((error: HttpErrorResponse) => {
+                const errorMessage = error.error?.message;
+                patchState(store, {
+                  error: errorMessage,
+                  loading: false,
+                });
+                toastService.showError(errorMessage);
+                return of(null);
+              })
+            )
+          )
+        )
+      );
+
       const clearParams = (): void => {
         patchState(store, {
           params: {
@@ -384,6 +416,7 @@ export const RecipeStore = signalStore(
         getRandomRecipes,
         approveRecipe,
         rejectRecipe,
+        rateRecipe,
         clearParams,
         clearSelectedRecipe,
         setParams,
