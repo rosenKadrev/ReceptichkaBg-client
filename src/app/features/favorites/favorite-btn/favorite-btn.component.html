@@ -1,0 +1,9 @@
+<button mat-icon-button
+        (click)="onToggle(); $event.stopPropagation()"
+        [class.favorite-active]="isFavorite()"
+        [matTooltip]="tooltipText()"
+        matTooltipPosition="above"
+        class="favorite-btn"
+        aria-label="Toggle favorite">
+    <mat-icon>{{ isFavorite() ? 'favorite' : 'favorite_border' }}</mat-icon>
+</button>

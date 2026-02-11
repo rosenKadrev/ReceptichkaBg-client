@@ -16,6 +16,7 @@ import { AuthResponse, DataResponse, LoginRequest, User, UserFilters } from './m
 import { ToastService } from '../services/toast.service';
 import { Router } from '@angular/router';
 import { TokenExpirationService } from '../services/token-expiration.service';
+import { FavoriteStore } from './favorite.store';
 
 interface UserState {
   user: User | null;
@@ -73,6 +74,7 @@ export const UserStore = signalStore(
       authService = inject(AuthService),
       userService = inject(UserService),
       toastService = inject(ToastService),
+      favoriteStore = inject(FavoriteStore),
       router = inject(Router),
       tokenExpirationService = inject(TokenExpirationService)
     ) => {
@@ -93,6 +95,7 @@ export const UserStore = signalStore(
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
                 });
+                favoriteStore.loadFavorites();
               }),
               catchError((error: HttpErrorResponse) => {
                 const errorMessage = error.error?.message;
@@ -127,6 +130,7 @@ export const UserStore = signalStore(
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
                 });
+                favoriteStore.loadFavorites();
               }),
               catchError((error: HttpErrorResponse) => {
                 const errorMessage = error.error?.message;
@@ -204,6 +208,7 @@ export const UserStore = signalStore(
         localStorage.removeItem('user');
         patchState(store, initialState);
         tokenExpirationService.stopTokenExpirationCheck();
+        favoriteStore.clearFavorites();
         toastService.showInfo('Успешно излизане от системата');
       };
 

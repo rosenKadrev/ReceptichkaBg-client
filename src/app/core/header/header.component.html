@@ -39,7 +39,7 @@
              class="avatar-image"
              alt="User Avatar">
         } @else {
-        <mat-icon class="avatar">account_circle</mat-icon>
+        <mat-icon class="nav-icon">account_circle</mat-icon>
         }
       </button>
       <mat-menu #userMenu="matMenu">
@@ -71,6 +71,18 @@
           <span>Изход</span>
         </button>
       </mat-menu>
+      @if (!favoriteStore.loading()) {
+      <button mat-icon-button
+              [routerLink]="['/favorites']"
+              matTooltip="Любими рецепти"
+              class="favorites-button">
+        <mat-icon [matBadge]="favoriteStore.favoriteRecipeIds().length > 0 ? favoriteStore.favoriteRecipeIds().length : null"
+                  matBadgeSize="large"
+                  class="nav-icon">
+          favorite
+        </mat-icon>
+      </button>
+      }
       } @else {
       <button mat-flat-button
               class="over-sm"

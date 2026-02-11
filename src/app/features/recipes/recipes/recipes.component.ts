@@ -24,6 +24,7 @@ import { RecipeFilters } from '../../../store/models/data.models';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
 import { UserStore } from '../../../store/user.store';
 import { DisplayRatingComponent } from "../../rating/display-rating/display-rating.component";
+import { FavoriteButtonComponent } from '../../favorites/favorite-btn/favorite-btn.component';
 
 @Component({
   selector: 'app-recipes',
@@ -46,7 +47,8 @@ import { DisplayRatingComponent } from "../../rating/display-rating/display-rati
     MatSelect,
     MatOption,
     MatIcon,
-    DisplayRatingComponent
+    DisplayRatingComponent,
+    FavoriteButtonComponent
   ],
   templateUrl: './recipes.component.html',
   styleUrls: ['./recipes.component.scss'],

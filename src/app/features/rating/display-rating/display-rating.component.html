@@ -1,25 +1,25 @@
 <div class="rating-display">
     <div class="stars">
-        @for (star of [].constructor(fullStars); track $index) {
-        <mat-icon [style.fontSize]="getIconSize()"
-                  [style.width]="getIconSize()"
-                  [style.height]="getIconSize()"
+        @for (star of [].constructor(fullStars()); track $index) {
+        <mat-icon [style.fontSize]="iconSize()"
+                  [style.width]="iconSize()"
+                  [style.height]="iconSize()"
                   class="star-icon filled">
             star
         </mat-icon>
         }
-        @if (hasHalfStar) {
-        <mat-icon [style.fontSize]="getIconSize()"
-                  [style.width]="getIconSize()"
-                  [style.height]="getIconSize()"
+        @if (hasHalfStar()) {
+        <mat-icon [style.fontSize]="iconSize()"
+                  [style.width]="iconSize()"
+                  [style.height]="iconSize()"
                   class="star-icon filled">
             star_half
         </mat-icon>
         }
-        @for (star of [].constructor(emptyStars); track $index) {
-        <mat-icon [style.fontSize]="getIconSize()"
-                  [style.width]="getIconSize()"
-                  [style.height]="getIconSize()"
+        @for (star of [].constructor(emptyStars()); track $index) {
+        <mat-icon [style.fontSize]="iconSize()"
+                  [style.width]="iconSize()"
+                  [style.height]="iconSize()"
                   class="star-icon empty">
             star_border
         </mat-icon>

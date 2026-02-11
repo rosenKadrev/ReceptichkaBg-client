@@ -4,6 +4,9 @@ import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatMenu, MatMenuItem, MatMenuTrigger } from '@angular/material/menu';
 import { MatIcon } from '@angular/material/icon';
 import { UserStore } from '../../store/user.store';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatBadgeModule } from '@angular/material/badge';
+import { FavoriteStore } from '../../store/favorite.store';
 
 @Component({
   selector: 'app-header',
@@ -16,7 +19,9 @@ import { UserStore } from '../../store/user.store';
     MatMenu,
     MatIcon,
     MatMenuItem,
-    MatMenuTrigger
+    MatMenuTrigger,
+        MatBadgeModule,
+    MatTooltipModule
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -24,6 +29,7 @@ import { UserStore } from '../../store/user.store';
 export class HeaderComponent {
   public sidenavToggle = output<void>();
   public userStore = inject(UserStore);
+    public favoriteStore = inject(FavoriteStore);
   private router = inject(Router);
 
   public onToggleSidenav() {

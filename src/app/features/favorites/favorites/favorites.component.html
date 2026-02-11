@@ -1,0 +1,121 @@
+<div class="favorites-container">
+    <div class="favorites-header">
+        <h1 class="favorites-title">
+            <mat-icon class="title-icon">favorite</mat-icon>
+            Любими рецепти
+        </h1>
+        <p class="favorites-subtitle">
+            {{ favoriteStore.totalResults() }} {{ favoriteStore.totalResults() === 1 ? 'любима рецепта' : 'любими рецепти' }}
+        </p>
+    </div>
+
+    @if (favoriteStore.loading() && favoriteStore.favoriteRecipes().length === 0) {
+    <div class="loading-container">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p class="loading-text">Зареждане на любими рецепти...</p>
+    </div>
+    }
+
+    @if (!favoriteStore.loading() && favoriteStore.favoriteRecipes().length === 0) {
+    <div class="empty-state">
+        <mat-icon class="empty-icon">favorite_border</mat-icon>
+        <h2 class="empty-title">Няма любими рецепти</h2>
+        <p class="empty-text">Добавете рецепти в любими, за да ги видите тук</p>
+    </div>
+    }@else if (!favoriteStore.loading() && favoriteStore.favoriteRecipes().length > 0) {
+    <div class="recipes-grid">
+        @for (recipe of favoriteStore.favoriteRecipes(); track recipe.id) {
+        <mat-card class="recipe-card"
+                  (click)="viewRecipe(recipe.id)">
+            <div class="card-image-container">
+                <img mat-card-image
+                     [src]="recipe.images[0].imageUrl"
+                     [alt]="recipe.description"
+                     class="recipe-image" />
+                <button mat-icon-button
+                        class="favorite-button active"
+                        (click)="toggleFavorite(recipe.id, $event)">
+                    <mat-icon>favorite</mat-icon>
+                </button>
+            </div>
+
+            <mat-card-content class="card-content">
+                <h2 class="recipe-title">{{ recipe.name }}</h2>
+
+                @if (recipe.createdBy) {
+                <div class="recipe-creator">
+                    <span class="creator-label">Създадена от:</span>
+                    <span class="creator-name">{{ recipe.createdBy }}</span>
+                </div>
+                }
+
+                <div class="recipe-details">
+                    @if (recipe.category) {
+                    <div class="detail-row">
+                        <span class="detail-label">Категория:</span>
+                        <span class="detail-value">{{ recipe.category }}</span>
+                    </div>
+                    }
+
+                    @if (recipe.typeOfProcessing) {
+                    <div class="detail-row">
+                        <span class="detail-label">Тип обработка:</span>
+                        <span class="detail-value">{{ recipe.typeOfProcessing }}</span>
+                    </div>
+                    }
+
+                    @if (recipe.degreeOfDifficulty) {
+                    <div class="detail-row">
+                        <span class="detail-label">Трудност:</span>
+                        <span class="detail-value">{{ recipe.degreeOfDifficulty }}</span>
+                    </div>
+                    }
+
+                    @if (recipe.rating) {
+                    <div class="detail-row">
+                        <span class="detail-label">Оценка:</span>
+                        <div class="rating-container">
+                            <app-display-rating [averageRating]="recipe?.rating?.averageRating || 0"
+                                                [ratingCount]="recipe?.rating?.ratingCount || 0"
+                                                size="small">
+                            </app-display-rating>
+                        </div>
+                    </div>
+                    }
+                </div>
+
+                <div class="recipe-meta">
+                    @if (recipe.prepTime) {
+                    <div class="meta-item">
+                        <mat-icon>restaurant</mat-icon>
+                        <span>{{ recipe.prepTime }} мин.</span>
+                    </div>
+                    }
+
+                    @if (recipe.cookTime) {
+                    <div class="meta-item">
+                        <mat-icon>schedule</mat-icon>
+                        <span>{{ recipe.cookTime }} мин.</span>
+                    </div>
+                    }
+
+                    @if (recipe.servings) {
+                    <div class="meta-item">
+                        <mat-icon>people</mat-icon>
+                        <span>{{ recipe.servings }}</span>
+                    </div>
+                    }
+                </div>
+            </mat-card-content>
+        </mat-card>
+        }
+    </div>
+    }
+
+    @if (favoriteStore.loading() && favoriteStore.favoriteRecipes().length > 0) {
+    <div class="loading-more">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Зареждане на още рецепти...</p>
+    </div>
+    }
+</div>

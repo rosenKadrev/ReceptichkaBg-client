@@ -9,6 +9,7 @@ import { roleGuard } from './guards/role.guard';
 import { UsersComponent } from './features/users/users.component';
 import { PasswordResetComponent } from './features/auth/password-reset/password-reset.component';
 import { AddArticleComponent } from './features/article-categories/add-article/add-article.component';
+import { FavoritesComponent } from './features/favorites/favorites/favorites.component';
 
 export const routes: Routes = [
     {
@@ -58,6 +59,11 @@ export const routes: Routes = [
         path: 'edit-article/:id',
         component: AddArticleComponent,
         canActivate: [authGuard, roleGuard]
+    },
+    {
+        path: 'favorites',
+        component: FavoritesComponent,
+        canActivate: [authGuard],
     },
     {
         path: '**',

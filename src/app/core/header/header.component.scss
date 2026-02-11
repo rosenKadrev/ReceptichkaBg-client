@@ -39,27 +39,28 @@
   }
 }
 
-.avatar {
+.nav-icon {
   color: #6c757d;
-  font-size: 34px;
-  height: 34px;
-  width: 34px;
+  font-size: 33px;
+  height: 33px;
+  width: 33px;
 }
 
 .menu-icon {
   color: #a900a9;
 }
 
-.avatar-button {
-  height: 50px;
-  width: 50px;
+.avatar-button,
+.favorites-button {
+  height: 49px;
+  width: 49px;
 }
 
 .avatar-image {
   border-radius: 50%;
   object-fit: cover;
-  height: 34px;
-  width: 34px;
+  height: 33px;
+  width: 33px;
 }
 
 mat-icon.admin-icon {
@@ -71,40 +72,31 @@ mat-icon.admin-icon {
   color: #a900a9;
 }
 
-@media (min-width: 819px) {
+@media (min-width: 850px) {
   .under-sm {
     display: none;
   }
 }
 
-@media (max-width: 819px) {
+@media (max-width: 850px) {
   .over-sm {
     display: none;
   }
 
   .app-header .logo h1 {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
 }
 
-@media (max-width: 340px) {
-  .app-header .logo h1 {
-    font-size: 1.4rem;
-  }
-}
-
-@media (max-width: 290px) {
-  .app-header .logo h1 {
-    font-size: 1.1rem;
-  }
-
-  .avatar {
+@media (max-width: 600px) {
+  .nav-icon {
     font-size: 26px;
     height: 26px;
     width: 26px;
   }
 
-  .avatar-button {
+  .avatar-button,
+  .favorites-button {
     height: 42px;
     width: 42px;
   }
@@ -112,5 +104,42 @@ mat-icon.admin-icon {
   .avatar-image {
     height: 26px;
     width: 26px;
+  }
+}
+
+@media (max-width: 340px) {
+  .app-header .logo h1 {
+    font-size: 1.3rem;
+  }
+
+  .nav-icon {
+    font-size: 22px;
+    height: 22px;
+    width: 22px;
+  }
+
+  .avatar-button,
+  .favorites-button {
+    height: 38px;
+    width: 38px;
+  }
+
+  .avatar-image {
+    height: 22px;
+    width: 22px;
+  }
+}
+
+@media (max-width: 290px) {
+  .container {
+    padding: 0;
+  }
+
+  .app-header .logo h1 {
+    font-size: 1.1rem;
+  }
+
+  .menu-icon {
+    font-size: 20px;
   }
 }
