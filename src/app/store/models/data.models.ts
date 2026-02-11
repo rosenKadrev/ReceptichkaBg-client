@@ -146,3 +146,8 @@ export interface ArticleParams {
   pageSize: number;
   categoryId?: string;
 }
+
+export interface FavoritesParams {
+  currentPage: number;
+  pageSize: number;
+}

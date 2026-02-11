@@ -203,11 +203,9 @@
         <button mat-button
                 [routerLink]="['/recipes/all', recipe.id]">Виж рецептата</button>
         @if(userStore.isLoggedIn()) {
-        <button mat-button
-                disabled
-                class="favorite-btn">
-          <mat-icon>favorite</mat-icon>
-        </button>
+        @if(userStore.isLoggedIn()) {
+        <app-favorite-button [recipeId]="recipe.id"></app-favorite-button>
+        }
         }
       </mat-card-actions>
       }

@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { RouterModule, RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { SidenavComponent } from './core/sidenav/sidenav.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { FavoriteStore } from './store/favorite.store';
+import { UserStore } from './store/user.store';
 
 
 @Component({
@@ -13,4 +15,17 @@ import { MatSidenavModule } from '@angular/material/sidenav';
   templateUrl: './app.html',
   styleUrls: ['./app.scss'],
 })
-export class App { }
+export class App {
+  private userStore = inject(UserStore);
+  private favoriteStore = inject(FavoriteStore);
+
+  constructor() {
+    effect(() => {
+      if (this.userStore.isLoggedIn()) {
+        this.favoriteStore.loadFavorites();
+      } else {
+        this.favoriteStore.clearFavorites();
+      }
+    });
+  }
+}

@@ -23,6 +23,8 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 - 🖼️ Image uploads for recipes
 - ⭐ Recipe rating system - Rate recipes and view average ratings
 - 📊 See how many users have rated each recipe
+- ❤️ Save favorite recipes for quick access
+- 📚 Personal favorites collection
 
 ### 📰 Articles & Content
 
@@ -35,6 +37,8 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 
 - 👤 User profiles
 - 📚 Personal recipe collections
+- ❤️ Favorites management - Add/remove recipes from favorites
+- 🔍 View all your favorite recipes in one place
 - 🛠️ User management (admin functionality)
 - ⭐ Rate recipes and update ratings anytime
 
@@ -66,6 +70,8 @@ A modern, full-stack web application for sharing and discovering authentic Bulga
 1. **Register/Login** - Create an account or login
 2. **Browse Recipes** - Explore recipes from the community
 3. **Rate Recipes** - Share your opinion by rating recipes (1-5 stars)
+4. **Save Favorites** - Mark recipes you love with the heart icon
+5. **View Favorites** - Access all your favorite recipes in one convenient location
 4. **Add Recipe** - Share your own recipes
 5. **Read Articles** - Discover cooking tips and articles
 

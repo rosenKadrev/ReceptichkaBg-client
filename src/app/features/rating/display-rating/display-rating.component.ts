@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input } from '@angular/core';
+import { Component, computed, input } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 
 @Component({
@@ -17,25 +17,15 @@ export class DisplayRatingComponent {
     public ratingCount = input<number>(1);
     public showCount = input<boolean>(true);
     public size = input<string>('medium');
-
-    get fullStars(): number {
-        return Math.floor(this.averageRating());
-    }
-
-    get hasHalfStar(): boolean {
-        return this.averageRating() % 1 >= 0.5;
-    }
-
-    get emptyStars(): number {
-        return 5 - Math.ceil(this.averageRating());
-    }
-
-    getIconSize(): string {
+    public fullStars = computed(() => Math.floor(this.averageRating()));
+    public hasHalfStar = computed(() => this.averageRating() % 1 >= 0.5);
+    public emptyStars = computed(() => 5 - Math.ceil(this.averageRating()));
+    public iconSize = computed(() => {
         const sizes: { [key: string]: string } = {
             'small': '16px',
             'medium': '20px',
             'large': '24px'
         };
         return sizes[this.size()] || sizes['medium'];
-    }
+    });
 }
