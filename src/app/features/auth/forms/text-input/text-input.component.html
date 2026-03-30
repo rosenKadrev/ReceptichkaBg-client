@@ -17,13 +17,13 @@
     {{control.errors?.['minlength'].requiredLength}} символа</mat-error>
   }
   @if(control.hasError('required')){
-  <mat-error>Моля въведете {{ label() }}</mat-error>
+  <mat-error>Моля въведете {{ label() }} {{ labelContext() }}</mat-error>
   }
   @if(control.hasError('email')){
   <mat-error>Моля въведете валиден {{ label() }}</mat-error>
   }
   @if(control.hasError('pattern')){
-  <mat-error>Моля въведете валидно {{ label() }}</mat-error>
+  <mat-error>Моля въведете валидно {{ label() }} {{ labelContext() }}</mat-error>
   }
   @if(control.hasError('min')){
   <mat-error>{{ label() }} трябва да е повече от 0</mat-error>

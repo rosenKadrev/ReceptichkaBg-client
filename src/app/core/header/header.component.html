@@ -71,7 +71,6 @@
           <span>Изход</span>
         </button>
       </mat-menu>
-      @if (!favoriteStore.loading()) {
       <button mat-icon-button
               [routerLink]="['/favorites']"
               matTooltip="Любими рецепти"
@@ -82,7 +81,6 @@
           favorite
         </mat-icon>
       </button>
-      }
       } @else {
       <button mat-flat-button
               class="over-sm"

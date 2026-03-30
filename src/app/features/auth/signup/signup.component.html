@@ -1,7 +1,7 @@
 @if (userStore.loading()) {
-    <div class="spinner-container">
-        <mat-spinner></mat-spinner>
-    </div>
+<div class="spinner-container">
+    <mat-spinner></mat-spinner>
+</div>
 }
 @else {
 <section class="d-flex j-content-center section-padding">
@@ -10,8 +10,9 @@
           class="signup-form">
         <text-input [formControl]="$any(signupForm.controls['username'])"
                     [label]="'Потребителско име'"
+                    [labelContext]="'на латиница'"
                     [type]="'username'"
-                    [hint]="'Моля въведете валидно потребителско име'"></text-input>
+                    [hint]="'Моля въведете валидно потребителско име на латиница'"></text-input>
         <text-input [formControl]="$any(signupForm.controls['name'])"
                     [label]="'Име'"
                     [type]="'text'"

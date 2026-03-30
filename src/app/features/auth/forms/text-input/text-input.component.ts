@@ -1,6 +1,6 @@
 import { Component, input, Self } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, ReactiveFormsModule } from '@angular/forms';
-import { MatError, MatFormField, MatHint, MatLabel} from '@angular/material/form-field';
+import { MatError, MatFormField, MatHint, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 
 @Component({
@@ -20,6 +20,7 @@ import { MatInput } from '@angular/material/input';
 
 export class TextInputComponent implements ControlValueAccessor {
     public label = input<string>('');
+    public labelContext = input<string>('');
     public hint = input<string>('');
     public type = input<string>('text');
 
