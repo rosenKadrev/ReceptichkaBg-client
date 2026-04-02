@@ -42,9 +42,13 @@ export const routes: Routes = [
         component: NotFoundComponent,
     },
     {
-        path: 'profile/:id',
+        path: 'profile/my/:id',
         component: ProfileComponent,
         canActivate: [authGuard],
+    },
+    {
+        path: 'profile/:id',
+        component: ProfileComponent,
     },
     {
         path: 'password-reset',

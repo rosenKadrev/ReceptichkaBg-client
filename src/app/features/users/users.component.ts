@@ -13,6 +13,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
+import { RouterModule } from '@angular/router';
 
 
 @Component({
@@ -30,7 +31,8 @@ import { MatInputModule } from '@angular/material/input';
         MatSelectModule,
         MatTooltip,
         MatDatepickerModule,
-        MatAnchor
+        MatAnchor,
+        RouterModule
     ],
     templateUrl: './users.component.html',
     styleUrls: ['./users.component.scss'],

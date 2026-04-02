@@ -361,6 +361,28 @@
                 color: #a900a9;
                 font-weight: 600;
             }
+
+            .creator-link {
+                color: #a900a9;
+                font-weight: 600;
+                text-decoration: none;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border-bottom: 1px solid transparent;
+
+                @media (hover: hover) {
+                    &:hover {
+                        color: #d400d4;
+                        opacity: 0.8;
+                    }
+                }
+
+                @media (hover: none) {
+                    &:active {
+                        opacity: 0.7;
+                    }
+                }
+            }
         }
 
         .recipe-details {

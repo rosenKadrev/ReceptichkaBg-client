@@ -1,50 +1,125 @@
 <div class="profile-container">
   @if(userStore.loading()){
-    <div class="spinner-container">
-      <mat-spinner></mat-spinner>
-    </div>
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
   } @else {
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="avatar-section" (click)="fileInput.click()">
-        @if (avatarPreview || userStore.user()?.avatarUrl) {
-          <img
-            [src]="avatarPreview || userStore.user()?.avatarUrl"
-            alt="User Avatar"
-            class="profile-avatar"/>
-        } @else {
-          <mat-icon class="default-avatar-icon">account_circle</mat-icon>
-        }
-        <div class="avatar-overlay">
-          <mat-icon>photo_camera</mat-icon>
-          <span>Промяна</span>
-        </div>
+  @if (isOwnProfile()) {
+  <form [formGroup]="profileForm"
+        (ngSubmit)="onSubmit()">
+    <div class="avatar-section"
+         (click)="fileInput.click()">
+      @if (avatarPreview || userStore.user()?.avatarUrl) {
+      <img [src]="avatarPreview || userStore.user()?.avatarUrl"
+           alt="User Avatar"
+           class="profile-avatar" />
+      } @else {
+      <mat-icon class="default-avatar-icon">account_circle</mat-icon>
+      }
+      <div class="avatar-overlay">
+        <mat-icon>photo_camera</mat-icon>
+        <span>Промяна</span>
       </div>
-      <input hidden (change)="onFileSelected($event)" #fileInput type="file" accept="image/*">
+    </div>
+    <input hidden
+           (change)="onFileSelected($event)"
+           #fileInput
+           type="file"
+           accept="image/*">
 
-      <text-input [formControl]="$any(profileForm.controls['username'])"
-                  [label]="'Потребителско име'"
-                  [type]="'username'"
-                  [hint]="'Потребителското име не може да бъде променяно'"></text-input>
-      <text-input [formControl]="$any(profileForm.controls['name'])"
-                  [label]="'Име'"
-                  [type]="'text'"
-                  [hint]="'Моля въведете валидно име'"></text-input>
-      <text-input [formControl]="$any(profileForm.controls['email'])"
-                  [label]="'Имейл'"
-                  [type]="'email'"
-                  [hint]="'Моля въведете валиден имейл'"></text-input>
-      <select-input [formControl]="$any(profileForm.controls['gender'])"
-                    [label]="'Пол'"
-                    [options]="genderOptions"
-                    [hint]="'Моля изберете пол'"></select-input>
-      <date-picker [formControl]="$any(profileForm.controls['dateOfBirth'])"
-                   [label]="'Дата на раждане'"
-                   [maxDate]="maxDate"
-                   [minDate]="minDate"
-                   [hint]="'MM/DD/YYYY'"></date-picker>
-      <button mat-flat-button color="primary" type="submit" [disabled]="profileForm.invalid">
-        Запази промените
-      </button>
-    </form>
+    <text-input [formControl]="$any(profileForm.controls['username'])"
+                [label]="'Потребителско име'"
+                [type]="'username'"
+                [hint]="'Потребителското име не може да бъде променяно'"></text-input>
+    <text-input [formControl]="$any(profileForm.controls['name'])"
+                [label]="'Име'"
+                [type]="'text'"
+                [hint]="'Моля въведете валидно име'"></text-input>
+    <text-input [formControl]="$any(profileForm.controls['email'])"
+                [label]="'Имейл'"
+                [type]="'email'"
+                [hint]="'Моля въведете валиден имейл'"></text-input>
+    <select-input [formControl]="$any(profileForm.controls['gender'])"
+                  [label]="'Пол'"
+                  [options]="genderOptions"
+                  [hint]="'Моля изберете пол'"></select-input>
+    <date-picker [formControl]="$any(profileForm.controls['dateOfBirth'])"
+                 [label]="'Дата на раждане'"
+                 [maxDate]="maxDate"
+                 [minDate]="minDate"
+                 [hint]="'MM/DD/YYYY'"></date-picker>
+    @if (isOwnProfile()) {
+    <button mat-flat-button
+            color="primary"
+            type="submit"
+            [disabled]="profileForm.invalid">
+      Запази промените
+    </button>
+    }
+  </form>
+  } @else {
+  <div class="profile-static">
+    <div class="static-avatar-wrap">
+      @if (userStore.selectedProfile()?.avatarUrl) {
+      <img [src]="userStore.selectedProfile()?.avatarUrl"
+           alt="User Avatar"
+           class="profile-avatar" />
+      } @else {
+      <mat-icon class="default-avatar-icon">account_circle</mat-icon>
+      }
+    </div>
+
+    <div class="static-title">Профил на потребител</div>
+
+    <div class="static-row">
+      <span class="label">Потребителско име</span>
+      <span class="value">{{ userStore.selectedProfile()?.username }}</span>
+    </div>
+
+    <div class="static-row">
+      <span class="label">Име</span>
+      <span class="value">{{ userStore.selectedProfile()?.name }}</span>
+    </div>
+
+    <div class="static-row">
+      <span class="label">Email</span>
+      <span class="value">{{ userStore.selectedProfile()?.email }}</span>
+    </div>
+
+    <div class="static-row">
+      <span class="label">Пол</span>
+      <span class="value">{{ userStore.selectedProfile()?.gender === 'male' ? 'Мъж' :
+        userStore.selectedProfile()?.gender === 'female' ? 'Жена' : userStore.selectedProfile()?.gender }}</span>
+    </div>
+
+    <div class="static-row">
+      <span class="label">Дата на раждане</span>
+      <span class="value">{{ userStore.selectedProfile()?.dateOfBirth | date:'dd.MM.yyyy' }}</span>
+    </div>
+
+    <div class="static-row recipes-row"
+         [class.disabled-row]="!canViewCreatorRecipes()"
+         (click)="canViewCreatorRecipes() && onViewCreatorRecipes()">
+      <span class="label">Брой рецепти</span>
+      <span class="hint"
+            [class.disabled-hint]="!canViewCreatorRecipes()">(Виж всички рецепти на потребителя)</span>
+      <span class="value recipes-count-value">
+        <mat-icon class="recipes-count-icon">menu_book</mat-icon>
+        {{ userStore.selectedProfile()?.recipesCount ?? 0 }}
+      </span>
+    </div>
+
+    <div class="static-row">
+      <span class="label">Средна оценка</span>
+      <span class="value">
+        <app-display-rating [averageRating]="userStore.selectedProfile()?.receivedRating?.averageRating ?? 0"
+                            [ratingCount]="userStore.selectedProfile()?.receivedRating?.ratingCount ?? 0"
+                            [size]="'small'">
+        </app-display-rating>
+      </span>
+    </div>
+
+  </div>
+  }
   }
 </div>

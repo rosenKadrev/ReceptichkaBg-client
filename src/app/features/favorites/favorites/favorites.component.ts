@@ -8,7 +8,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { RecipeStore } from '../../../store/recipe.store';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DisplayRatingComponent } from '../../rating/display-rating/display-rating.component';
 
 @Component({
@@ -21,7 +21,8 @@ import { DisplayRatingComponent } from '../../rating/display-rating/display-rati
         MatChipsModule,
         MatIcon,
         MatButtonModule,
-        DisplayRatingComponent
+        DisplayRatingComponent,
+        RouterLink
     ],
     templateUrl: './favorites.component.html',
     styleUrls: ['./favorites.component.scss']

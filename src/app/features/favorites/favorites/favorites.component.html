@@ -45,7 +45,9 @@
                 @if (recipe.createdBy) {
                 <div class="recipe-creator">
                     <span class="creator-label">Създадена от:</span>
-                    <span class="creator-name">{{ recipe.createdBy }}</span>
+                    <a class="creator-link"
+                       [routerLink]="['/profile', recipe.userId]"
+                       (click)="$event.stopPropagation()">{{ recipe.createdBy }}</a>
                 </div>
                 }
 

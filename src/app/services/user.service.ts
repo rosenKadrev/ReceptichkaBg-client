@@ -46,4 +46,8 @@ export class UserService {
   adminDeleteUser(userId: string): Observable<DataResponse<User>> {
     return this.http.delete<DataResponse<User>>(`${this.apiUrl}/${userId}`);
   }
+
+  getProfileById(userId: string): Observable<DataResponse<User>> {
+    return this.http.get<DataResponse<User>>(`${this.apiUrl}/profile/${userId}`);
+  }
 }

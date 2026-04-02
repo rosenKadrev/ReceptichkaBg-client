@@ -160,7 +160,12 @@
             {{ getStatusText(recipe.status) }}
           </span>
           } @else {
-          <strong>Създаденa от:</strong> {{ recipe.createdBy }}
+          <strong>Създаденa от:</strong>
+          <a class="creator-link"
+             [routerLink]="['/profile', recipe.userId]"
+             (click)="$event.stopPropagation()">
+            {{ recipe.createdBy }}
+          </a>
           }
         </mat-card-subtitle>
       </mat-card-header>

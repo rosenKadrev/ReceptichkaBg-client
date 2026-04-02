@@ -23,6 +23,7 @@ interface UserState {
   token: string | null;
   loading: boolean;
   error: string | null;
+  selectedProfile: User | null;
   users: User[];
   params: {
     currentPage: number;
@@ -44,6 +45,7 @@ const initialState: UserState = {
   token: null,
   loading: false,
   error: null,
+  selectedProfile: null,
   users: [],
   params: {
     currentPage: 1,
@@ -332,6 +334,33 @@ export const UserStore = signalStore(
         )
       );
 
+      const getUserProfileById = rxMethod<string>(
+        pipe(
+          tap(() => patchState(store, { loading: true, error: null })),
+          switchMap((userId) =>
+            userService.getProfileById(userId).pipe(
+              tap((response) => {
+                patchState(store, {
+                  loading: false,
+                  error: null,
+                  selectedProfile: response.data
+                });
+                router.navigate(['/profile', userId]);
+              }),
+              catchError((error: HttpErrorResponse) => {
+                const errorMessage = error.error?.message;
+                patchState(store, {
+                  error: errorMessage,
+                  loading: false
+                });
+                toastService.showError(errorMessage);
+                return of(null);
+              })
+            )
+          )
+        )
+      );
+
       const clearParams = (): void => {
         patchState(store, {
           params: {
@@ -359,7 +388,11 @@ export const UserStore = signalStore(
 
       const clearUsers = (): void => {
         patchState(store, { users: [] });
-      }
+      };
+
+      const clearSelectedProfile = (): void => {
+        patchState(store, { selectedProfile: null });
+      };
 
       return {
         login,
@@ -371,11 +404,13 @@ export const UserStore = signalStore(
         adminDeleteUser,
         forgotPassword,
         resetPassword,
+        getUserProfileById,
         logout,
         clearError,
         setParams,
         clearUsers,
         clearParams,
+        clearSelectedProfile
       };
     }
   ),

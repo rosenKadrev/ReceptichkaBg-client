@@ -217,7 +217,6 @@ export class RecipesComponent {
         await this.recipeStore.deleteRecipe(recipeId);
       }
     });
-
   }
 
   getStatusText(status: string): string {
