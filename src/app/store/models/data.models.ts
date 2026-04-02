@@ -17,8 +17,14 @@ export interface User {
   lastActive?: string;
   avatar?: File;
   role?: string;
+  recipesCount?: number;
+  receivedRating?: ReceivedRating;
 }
 
+export interface ReceivedRating {
+  averageRating: number;
+  ratingCount: number;
+}
 export interface LoginRequest {
   email: string;
   password: string;

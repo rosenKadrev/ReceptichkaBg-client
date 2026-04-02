@@ -396,6 +396,17 @@
   }
 }
 
+.creator-link {
+  color: #a900a9;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    color: #d100d1;
+  }
+}
+
 @media (max-width: 674px) {
 
   .recipe-card img[mat-card-image],

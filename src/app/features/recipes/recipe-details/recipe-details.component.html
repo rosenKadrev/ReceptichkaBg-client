@@ -41,7 +41,12 @@
       <div class="recipe-creator">
         <div class="creator-info">
           <mat-icon class="creator-icon">person</mat-icon>
-          <span>Създадена от: <strong>{{ recipe.createdBy }}</strong></span>
+          <strong>Създаденa от:</strong>
+          <a class="creator-link"
+             [routerLink]="['/profile', recipe.userId]"
+             (click)="$event.stopPropagation()">
+            {{ recipe.createdBy }}
+          </a>
         </div>
       </div>
       }
