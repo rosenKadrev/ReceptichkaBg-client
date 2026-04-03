@@ -83,22 +83,39 @@
 
       <div class="section">
         <h2>Съставки</h2>
-        <mat-chip-listbox>
+        <div class="chip-list-wrapper">
           @for (ingredient of recipe.ingredients; track $index) {
-          <mat-chip-option>
-            {{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit }}
-          </mat-chip-option>
+          <mat-chip-listbox class="chip-list"
+                            [multiple]="true">
+            <mat-chip-option class="chip">
+              <div class="chip-content">
+                <span class="chip-number">{{ $index + 1 }}.</span>
+                <span class="chip-text">{{ ingredient.name }} - {{ ingredient.quantity }} {{ ingredient.unit
+                  }}</span>
+              </div>
+            </mat-chip-option>
+          </mat-chip-listbox>
           }
-        </mat-chip-listbox>
+        </div>
+        <p class="marked-hint">* Можете да маркирате съставките докато ги приготвяте, за по-лесно следене.</p>
       </div>
 
       <div class="section">
         <h2>Начин на приготвяне</h2>
-        <ol class="instructions-list">
-          @for (instruction of recipe.instructions; track $index; let i = $index) {
-          <li>{{ instruction.description }}</li>
+        <div class="chip-list-wrapper">
+          @for (instruction of recipe.instructions; track $index) {
+          <mat-chip-listbox class="chip-list instruction-list"
+                            [multiple]="true">
+            <mat-chip-option class="chip">
+              <div class="chip-content">
+                <span class="chip-number">{{ $index + 1 }}.</span>
+                <span class="chip-text instruction-text">{{ instruction.description }}</span>
+              </div>
+            </mat-chip-option>
+          </mat-chip-listbox>
           }
-        </ol>
+        </div>
+        <p class="marked-hint">* Можете да маркирате инструкциите докато ги изпълнявате, за по-лесно следене.</p>
       </div>
 
       <div class="section">

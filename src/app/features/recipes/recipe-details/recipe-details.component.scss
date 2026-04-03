@@ -1,3 +1,5 @@
+@use '@angular/material' as mat;
+
 .recipe-details-container {
   max-width: 800px;
   margin: 0 auto;
@@ -258,20 +260,60 @@
   }
 }
 
-.instructions-list {
-  padding-left: 1.5rem;
-  margin: 1rem 0 0;
+.chip-list-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
 
-  li {
-    margin-bottom: 1rem;
-    line-height: 1.6;
-    color: #444;
-    font-size: 1rem;
+.chip-list {
+  display: flex;
+  width: fit-content;
 
-    &:last-child {
-      margin-bottom: 0;
+  .chip {
+    .chip-text {
+      white-space: normal;
+      word-break: break-word;
+      overflow-wrap: anywhere;
     }
   }
+}
+
+.chip-list.instruction-list {
+  @include mat.chips-overrides((outline-width: 0));
+
+  .chip {
+    .chip-text.instruction-text {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+  }
+}
+
+.chip {
+  width: fit-content;
+  min-height: 2.2rem;
+  height: auto;
+  white-space: normal;
+  line-height: 1.4;
+
+  .chip-number {
+    font-weight: 700;
+    color: #a900a9;
+    margin-right: 0.4rem;
+    min-width: 1.5rem;
+  }
+}
+
+.chip-content {
+  padding: 0.3rem 0;
+}
+
+.marked-hint {
+  font-size: 0.9rem;
+  color: #999;
+  font-style: italic;
+  line-height: 1.2;
 }
 
 .recipe-actions {
@@ -480,13 +522,12 @@
     }
   }
 
-  .instructions-list {
-    padding-left: 1rem;
-
-    li {
-      margin-bottom: 0.7rem;
-      font-size: 0.9rem;
-
+  .chip-list.instruction-list {
+    .chip {
+      .chip-text.instruction-text {
+        font-size: 0.9rem;
+        line-height: normal;
+      }
     }
   }
 
@@ -531,6 +572,10 @@
         font-size: 1rem;
       }
     }
+  }
+
+  .marked-hint {
+    font-size: 0.8rem;
   }
 
   .rating-section {
