@@ -82,8 +82,13 @@
     </div>
 
     <div class="static-row">
-      <span class="label">Email</span>
+      <span class="label">Имейл</span>
       <span class="value">{{ userStore.selectedProfile()?.email }}</span>
+    </div>
+
+    <div class="static-row">
+      <span class="label">Последно влизане</span>
+      <span class="value">{{ userStore.selectedProfile()?.lastActive | date:'dd.MM.yyyy' }}</span>
     </div>
 
     <div class="static-row">
