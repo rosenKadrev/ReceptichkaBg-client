@@ -1,9 +1,4 @@
 <div class="container">
-  @if(recipeStore.loading()){
-  <div class="spinner-container">
-    <mat-spinner></mat-spinner>
-  </div>
-  }@else if(!recipeStore.loading()){
   @if (segment() === 'my') {
   <h2 class="recipe-title">Моите рецепти</h2>
   } @else {
@@ -128,7 +123,11 @@
     </div>
   </div>
   }
-  @if(recipeStore.recipes().length > 0){
+  @if(recipeStore.loading()){
+  <div class="spinner-container">
+    <mat-spinner></mat-spinner>
+  </div>
+  } @else if(!recipeStore.loading() && recipeStore.recipes().length > 0) {
   <div class="recipe-list">
     @for(recipe of recipeStore.recipes(); track recipe.id){
     <mat-card class="recipe-card"
@@ -217,7 +216,7 @@
     </mat-card>
     }
   </div>
-  } @else {
+  } @else if(!recipeStore.loading() && recipeStore.recipes().length === 0) {
   <div class="no-recipes">
     <mat-icon class="no-recipes-icon">restaurant_menu</mat-icon>
     <h2 class="no-recipes-title">Няма намерени рецепти</h2>
@@ -242,5 +241,4 @@
                  (page)="onPageChange($event)"
                  aria-label="Select page">
   </mat-paginator>
-  }
 </div>
