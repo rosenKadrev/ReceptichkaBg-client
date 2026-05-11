@@ -1,6 +1,5 @@
 import { Component, computed, effect, inject, signal, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatSpinner } from '@angular/material/progress-spinner';
 import { RecipeStore } from '../../../store/recipe.store';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
@@ -20,7 +19,6 @@ import { MatDatepickerInputEvent, MatDatepickerModule } from '@angular/material/
     standalone: true,
     imports: [
         CommonModule,
-        MatSpinner,
         MatFormFieldModule,
         MatTableModule,
         MatPaginatorModule,
@@ -67,6 +65,12 @@ export class ApproveRecipesComponent {
         active: 'Активна',
         rejected: 'Отхвърлена'
     });
+    public skeletonRows = computed(() => 
+        Array.from({ length: this.recipeStore.recipes().length > 0 ? this.recipeStore.recipes().length : this.recipeStore.params().pageSize }, (_, index) => ({ id: index }))
+    );
+    public tableDataSource = computed((): any =>
+        this.recipeStore.loading() ? this.skeletonRows() : this.recipeStore.recipes()
+    );
 
     public getStatusLabel = computed(() => (status: string) =>
         this.statusLabels()[status] ?? status
@@ -239,6 +243,10 @@ export class ApproveRecipesComponent {
         this.paginator.pageIndex = 0;
         this.dateRange = { start: null, end: null };
         this.recipeStore.clearParams();
+        this.recipeStore.setParams({
+            ...this.recipeStore.params(),
+            pageSize: 10,
+        });
     }
 
     toggle(recipe: Recipe) {

@@ -118,6 +118,33 @@ tr.element-row:hover {
     font-size: 0.9rem;
 }
 
+.skeleton-table {
+    width: 100%;
+}
+
+.skeleton-row {
+    pointer-events: none;
+}
+
+.skeleton-bar {
+    height: 14px;
+    width: 100%;
+    max-width: 220px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #f0e6f6 25%, #e5d3ef 37%, #f0e6f6 63%);
+    background-size: 400% 100%;
+    animation: skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 100% 0;
+    }
+    100% {
+        background-position: -100% 0;
+    }
+}
+
 @media (max-width: 600px) {
     .container {
         padding: 8px;

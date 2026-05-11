@@ -2,7 +2,6 @@ import { Component, computed, effect, inject, signal, ViewChild } from '@angular
 import { CommonModule } from '@angular/common';
 import { UserStore } from '../../store/user.store';
 import { User, UserFilters } from '../../store/models/data.models';
-import { MatSpinner } from '@angular/material/progress-spinner';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginator, MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
@@ -21,7 +20,6 @@ import { RouterModule } from '@angular/router';
     standalone: true,
     imports: [
         CommonModule,
-        MatSpinner,
         MatFormFieldModule,
         MatTableModule,
         MatPaginatorModule,
@@ -45,6 +43,12 @@ export class UsersComponent {
     private searchEmailSubject = new Subject<string>();
     public dateRange: { start: Date | null; end: Date | null } = { start: null, end: null };
     public columnsToDisplay: string[] = ['name', 'email', 'gender', 'dateCreated', 'role', 'actions'];
+    public skeletonRows = computed(() => 
+        Array.from({ length: this.userStore.users().length > 0 ? this.userStore.users().length : this.userStore.params().pageSize }, (_, index) => ({ id: index }))
+    );
+    public tableDataSource = computed((): any => 
+        this.userStore.loading() ? this.skeletonRows() : this.userStore.users()
+    );
     public expandedUser: User | null = null;
     public columnLabels = signal<Record<string, string>>({
         name: 'Име',

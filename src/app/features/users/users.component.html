@@ -1,12 +1,7 @@
 <div class="container">
-  @if(userStore.loading()){
-  <div class="spinner-container">
-    <mat-spinner></mat-spinner>
-  </div>
-  } @else if(!userStore.loading()) {
   <div class="table-scroll-container">
     <table mat-table
-           [dataSource]="userStore.users()"
+           [dataSource]="tableDataSource()"
            multiTemplateDataRows>
       @for (column of columnsToDisplay; track column) {
       <ng-container matColumnDef="{{column}}">
@@ -105,6 +100,9 @@
         @if(column == 'actions') {
         <td mat-cell
             *matCellDef="let element">
+          @if(userStore.loading()) {
+          <div class="skeleton-bar"></div>
+          } @else {
           @if(userStore.isUserSuperAdmin() && element.role !== 'superAdmin' && element.role !== 'admin') {
           <button mat-icon-button
                   color="warn"
@@ -130,26 +128,54 @@
             <mat-icon>delete</mat-icon>
           </button>
           }
+          }
         </td>
         } @else if(column == 'gender') {
         <td mat-cell
-            *matCellDef="let element">{{ getGenderLabel()(element.gender) }}</td>
+            *matCellDef="let element">
+          @if(userStore.loading()) {
+          <div class="skeleton-bar"></div>
+          } @else {
+          {{ getGenderLabel()(element.gender) }}
+          }
+        </td>
         } @else if(column == 'role') {
         <td mat-cell
-            *matCellDef="let element">{{ getRoleLabel()(element.role) }}</td>
+            *matCellDef="let element">
+          @if(userStore.loading()) {
+          <div class="skeleton-bar"></div>
+          } @else {
+          {{ getRoleLabel()(element.role) }}
+          }
+        </td>
         } @else if(column == 'dateCreated') {
         <td mat-cell
-            *matCellDef="let element">{{ element[column] | date:'MMM d, y h:mm a' }}</td>
+            *matCellDef="let element">
+          @if(userStore.loading()) {
+          <div class="skeleton-bar"></div>
+          } @else {
+          {{ element[column] | date:'MMM d, y h:mm a' }}
+          }
+        </td>
         } @else if(column == 'name') {
         <td mat-cell
           *matCellDef="let element">
+          @if(userStore.loading()) {
+          <div class="skeleton-bar"></div>
+          } @else {
           <a class="user-link"
-           [routerLink]="['/profile', element.id]"
-           (click)="$event.stopPropagation()">{{ element[column] }}</a>
+             [routerLink]="['/profile', element.id]"
+             (click)="$event.stopPropagation()">{{ element[column] }}</a>
+          }
         </td>
         } @else {
         <td mat-cell
-            *matCellDef="let element">{{ element[column] }}
+            *matCellDef="let element">
+          @if(userStore.loading()) {
+          <div class="skeleton-bar"></div>
+          } @else {
+          {{ element[column] }}
+          }
         </td>
         }
       </ng-container>
@@ -158,8 +184,8 @@
           *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row
           *matRowDef="let row; columns: columnsToDisplay;"
-          class="element-row">
-      </tr>
+          class="element-row"
+          [class.skeleton-row]="userStore.loading()"></tr>
 
       <tr class="mat-row"
           *matNoDataRow>
@@ -179,5 +205,4 @@
                  (page)="onPageChange($event)"
                  aria-label="Изберете страница"
                  class="pt-10"></mat-paginator>
-  }
 </div>
