@@ -33,4 +33,8 @@ export class AuthService {
       data
     );
   }
+
+  googleLogin(credential: string): Observable<DataResponse<AuthResponse>> {
+    return this.http.post<DataResponse<AuthResponse>>(`${this.apiUrl}/google`, { credential });
+  }
 }

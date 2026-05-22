@@ -97,7 +97,6 @@ export const UserStore = signalStore(
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
                 });
-                favoriteStore.loadFavorites();
               }),
               catchError((error: HttpErrorResponse) => {
                 const errorMessage = error.error?.message;
@@ -132,7 +131,6 @@ export const UserStore = signalStore(
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
                 });
-                favoriteStore.loadFavorites();
               }),
               catchError((error: HttpErrorResponse) => {
                 const errorMessage = error.error?.message;
@@ -394,8 +392,43 @@ export const UserStore = signalStore(
         patchState(store, { selectedProfile: null });
       };
 
+      const googleLogin = rxMethod<string>(
+        pipe(
+          tap(() => patchState(store, { loading: true, error: null })),
+          switchMap((credential) =>
+            authService.googleLogin(credential).pipe(
+              tap((response: DataResponse<AuthResponse>) => {
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('user', JSON.stringify(response.data.user));
+                patchState(store, {
+                  user: response.data.user,
+                  token: response.data.token,
+                  loading: false,
+                });
+                toastService.showSuccess(response.message);
+                tokenExpirationService.startTokenExpirationCheck(() => {
+                  patchState(store, initialState);
+                });
+              }),
+              catchError((error: HttpErrorResponse) => {
+                const errorMessage = error.error?.message;
+                patchState(store, {
+                  error: errorMessage,
+                  user: null,
+                  token: null,
+                  loading: false
+                });
+                toastService.showError(errorMessage);
+                return of(null);
+              })
+            )
+          )
+        )
+      );
+
       return {
         login,
+        googleLogin,
         signup,
         updateUser,
         getAllUsers,
