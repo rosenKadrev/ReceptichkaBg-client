@@ -3,7 +3,7 @@
   margin: 2rem auto;
   padding: 2rem;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: var(--color-gray-50);
 }
 
 .avatar-section {
@@ -14,7 +14,7 @@
   border-radius: 50%;
   cursor: pointer;
   overflow: hidden;
-  box-shadow: 0 0 0 3px #b6b8bc, 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 0 3px var(--color-avatar-ring), 0 4px 12px rgba(0, 0, 0, 0.1);
 
   .profile-avatar {
     width: 100%;
@@ -27,7 +27,7 @@
     width: 100%;
     height: 100%;
     font-size: 170px;
-    color: #c0c6cb;
+    color: var(--color-avatar-icon);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,8 +75,8 @@ form {
   display: flex;
   flex-direction: column;
   gap: 0.9rem;
-  background: #fff;
-  border: 1px solid #ece7f5;
+  background: var(--color-white);
+  border: 1px solid var(--color-profile-border);
   border-radius: 14px;
   padding: 1.25rem;
   box-shadow: 0 8px 24px rgba(83, 39, 120, 0.08);
@@ -90,8 +90,8 @@ form {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #f3e7ff 0%, #e9d8ff 100%);
-    box-shadow: 0 0 0 3px #e3d4f7, 0 6px 18px rgba(136, 71, 192, 0.18);
+    background: linear-gradient(135deg, var(--color-primary-lighter) 0%, var(--color-profile-surface-2) 100%);
+    box-shadow: 0 0 0 3px var(--color-profile-surface-3), 0 6px 18px rgba(136, 71, 192, 0.18);
 
     .profile-avatar {
       width: 100%;
@@ -103,7 +103,7 @@ form {
       width: 100%;
       height: 100%;
       font-size: 128px;
-      color: #b39acb;
+      color: var(--color-profile-icon);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -114,7 +114,7 @@ form {
     text-align: center;
     font-size: 1.2rem;
     font-weight: 700;
-    color: #5f2f88;
+    color: var(--color-profile-text);
     margin-bottom: 0.25rem;
   }
 
@@ -125,16 +125,16 @@ form {
     gap: 1rem;
     padding: 0.75rem 0.9rem;
     border-radius: 10px;
-    background: #faf7ff;
-    border: 1px solid #efe9fb;
+    background: var(--color-profile-bg);
+    border: 1px solid var(--color-profile-border);
     transition: all 0.3s ease;
 
     &.recipes-row {
       cursor: pointer;
 
       &:hover {
-        background-color: #e9d8ff;
-        border-color: #d4c4f0;
+        background-color: var(--color-profile-surface-2);
+        border-color: var(--color-primary-muted);
         transform: translateX(4px);
       }
 
@@ -147,8 +147,8 @@ form {
         opacity: 0.75;
 
         &:hover {
-          background: #faf7ff;
-          border-color: #efe9fb;
+          background: var(--color-profile-bg);
+          border-color: var(--color-profile-border);
           transform: none;
         }
 
@@ -159,22 +159,22 @@ form {
     }
 
     .label {
-      color: #6f6290;
+      color: var(--color-profile-text-sub);
       font-weight: 600;
       font-size: 0.93rem;
     }
 
     .hint {
       font-size: 0.75rem;
-      color: #796794;
+      color: var(--color-profile-text-hint);
 
       &.disabled-hint {
-        color: #a6a0b1;
+        color: var(--color-profile-text-dim);
       }
     }
 
     .value {
-      color: #2f2445;
+      color: var(--color-profile-text-dark);
       font-weight: 500;
       text-align: right;
       word-break: break-word;
@@ -189,7 +189,7 @@ form {
         font-size: 1rem;
         width: 1rem;
         height: 1rem;
-        color: #7b52a5;
+        color: var(--color-profile-text-mid);
       }
     }
   }

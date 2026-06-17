@@ -12,7 +12,7 @@
     overflow-y: auto;
     overflow-y: auto;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(169, 0, 169, 0.4), 0 2px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 24px rgba(var(--color-primary-rgb), 0.4), 0 2px 12px rgba(0, 0, 0, 0.2);
     padding: 12px;
 
     &::-webkit-scrollbar {
@@ -20,21 +20,21 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: var(--color-gray-100);
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #a900a9;
+        background: var(--color-primary);
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: #8a008a;
+        background: var(--color-primary-darker);
     }
 
     &::-webkit-scrollbar-corner {
-        background: #f1f1f1;
+        background: var(--color-gray-100);
         border-radius: 0 0 12px 0;
     }
 }
@@ -70,7 +70,7 @@ table {
     max-width: 220px;
     margin: 0 auto;
     border-radius: 999px;
-    background: linear-gradient(90deg, #f0e6f6 25%, #e5d3ef 37%, #f0e6f6 63%);
+    background: linear-gradient(90deg, var(--color-skeleton-base) 25%, var(--color-skeleton-highlight) 37%, var(--color-skeleton-base) 63%);
     background-size: 400% 100%;
     animation: skeleton-shimmer 1.4s ease infinite;
 }
@@ -94,7 +94,7 @@ tr.element-row {
 }
 
 tr.element-row:hover {
-    background-color: #f1e7f1;
+    background-color: var(--color-primary-hover-bg);
 }
 
 .element-row td {
@@ -125,10 +125,10 @@ tr.element-row:hover {
 }
 
 .expanded-columns>div {
-    background: #fff;
+    background: var(--color-white);
     border-radius: 8px;
     padding: 12px 14px;
-    box-shadow: 0 1px 4px rgba(169, 0, 169, 0.04);
+    box-shadow: 0 1px 4px rgba(var(--color-primary-rgb), 0.04);
     font-size: 1rem;
 }
 
@@ -157,9 +157,9 @@ tr.element-row:hover {
     max-width: 220px;
     max-height: 220px;
     border-radius: 6px;
-    box-shadow: 0 2px 8px rgba(169, 0, 169, 0.08);
-    border: 1px solid #e7c8f8;
-    background: #fff;
+    box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.08);
+    border: 1px solid var(--color-primary-light);
+    background: var(--color-white);
 }
 
 .header-filter {
@@ -184,7 +184,7 @@ tr.element-row:hover {
 }
 
 .active-sort {
-    color: #a900a9;
+    color: var(--color-primary);
     font-weight: bold;
 }
 

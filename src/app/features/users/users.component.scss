@@ -11,7 +11,7 @@
     max-height: 70vh;
     overflow-y: auto;
     border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(169, 0, 169, 0.4), 0 2px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 24px rgba(var(--color-primary-rgb), 0.4), 0 2px 12px rgba(0, 0, 0, 0.2);
     padding: 12px;
 
     &::-webkit-scrollbar {
@@ -19,21 +19,21 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: #f1f1f1;
+        background: var(--color-gray-100);
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb {
-        background: #a900a9;
+        background: var(--color-primary);
         border-radius: 10px;
     }
 
     &::-webkit-scrollbar-thumb:hover {
-        background: #8a008a;
+        background: var(--color-primary-darker);
     }
 
     &::-webkit-scrollbar-corner {
-        background: #f1f1f1;
+        background: var(--color-gray-100);
         border-radius: 0 0 12px 0;
     }
 }
@@ -52,7 +52,7 @@ tr.element-row {
 }
 
 tr.element-row:hover {
-    background-color: #f1e7f1;
+    background-color: var(--color-primary-hover-bg);
 }
 
 .element-row td {
@@ -81,19 +81,19 @@ tr.element-row:hover {
 }
 
 .active-sort {
-    color: #a900a9;
+    color: var(--color-primary);
     font-weight: bold;
 }
 
 .user-link {
-    color: #2c3e50;
+    color: var(--color-text-heading);
     font-weight: 500;
     text-decoration: none;
     cursor: pointer;
     transition: all 0.3s ease;
 
     &:hover {
-        color: #a900a9;
+        color: var(--color-primary);
     }
 
     &:active {
@@ -131,7 +131,7 @@ tr.element-row:hover {
     width: 100%;
     max-width: 220px;
     border-radius: 999px;
-    background: linear-gradient(90deg, #f0e6f6 25%, #e5d3ef 37%, #f0e6f6 63%);
+    background: linear-gradient(90deg, var(--color-skeleton-base) 25%, var(--color-skeleton-highlight) 37%, var(--color-skeleton-base) 63%);
     background-size: 400% 100%;
     animation: skeleton-shimmer 1.4s ease infinite;
 }

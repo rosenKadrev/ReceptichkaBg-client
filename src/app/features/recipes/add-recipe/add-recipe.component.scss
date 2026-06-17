@@ -6,7 +6,7 @@
 
 mat-card-title {
   font-size: 1.8rem;
-  color: #a900a9;
+  color: var(--color-primary);
   margin-bottom: 1.5rem;
 }
 
@@ -21,14 +21,14 @@ mat-form-field {
 }
 
 .form-array-container {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-gray-300);
   border-radius: 8px;
   padding: 1rem;
   margin-top: 1rem;
 
   h3 {
     margin-top: 0;
-    color: #333;
+    color: var(--color-gray-800);
   }
 }
 
@@ -65,7 +65,7 @@ mat-form-field {
 }
 
 .image-upload {
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--color-gray-300);
   border-radius: 8px;
   padding: 1rem;
 
@@ -77,7 +77,7 @@ mat-form-field {
   }
 
   .upload-hint {
-    color: #666;
+    color: var(--color-text-secondary);
     font-size: 0.875rem;
     margin-bottom: 1rem;
   }
@@ -86,19 +86,19 @@ mat-form-field {
     display: block;
     margin-bottom: 1rem;
     padding: 0.5rem;
-    border: 1px dashed #ccc;
+    border: 1px dashed var(--color-gray-400);
     border-radius: 4px;
 
     &::-webkit-file-upload-button {
       padding: 0.5rem 1rem;
       border: none;
-      background-color: #3f51b5;
+      background-color: var(--color-indigo);
       color: white;
       border-radius: 4px;
       cursor: pointer;
 
       &:hover {
-        background-color: #303f9f;
+        background-color: var(--color-indigo-dark);
       }
     }
   }

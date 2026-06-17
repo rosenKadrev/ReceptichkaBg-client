@@ -19,12 +19,12 @@
 }
 
 .article-title {
-    color: #a900a9;
+    color: var(--color-primary);
     font-size: 1.8rem;
     margin-bottom: 10px;
     font-weight: 700;
     letter-spacing: 1px;
-    text-shadow: 0 2px 8px #f3e1fa;
+    text-shadow: 0 2px 8px var(--color-primary-lighter);
     line-height: 1.1;
 }
 
@@ -32,14 +32,14 @@
     display: flex;
     gap: 16px;
     font-size: 0.95rem;
-    color: #888;
+    color: var(--color-text-light);
     margin-bottom: 18px;
     align-items: center;
 }
 
 .category {
-    background: #f3e1fa;
-    color: #a900a9;
+    background: var(--color-primary-lighter);
+    color: var(--color-primary);
     padding: 2px 10px;
     border-radius: 8px;
     font-weight: 500;
@@ -48,17 +48,17 @@
 
 .date {
     font-style: italic;
-    color: #b47ac2;
+    color: var(--color-profile-icon);
     padding-left: 10px;
 }
 
 .article-description {
     font-size: 1.15rem;
-    color: #444;
+    color: var(--color-gray-700);
     margin-bottom: 18px;
     font-style: italic;
-    background: #f8f9fa;
-    border-left: 4px solid #a900a9;
+    background: var(--color-gray-50);
+    border-left: 4px solid var(--color-primary);
     padding: 10px 16px;
     border-radius: 6px;
     white-space: pre-line;
@@ -70,21 +70,21 @@
 
 .article-paragraph {
     font-size: 1.05rem;
-    color: #222;
+    color: var(--color-gray-900);
     line-height: 1.7;
     margin-bottom: 32px;
     padding: 18px 16px;
-    background: #f8f9fa;
+    background: var(--color-gray-50);
     border-radius: 12px;
-    box-shadow: 0 1px 4px rgba(169, 0, 169, 0.04);
-    border-left: 3px solid #a900a9;
+    box-shadow: 0 1px 4px rgba(var(--color-primary-rgb), 0.04);
+    border-left: 3px solid var(--color-primary);
     transition: box-shadow 0.2s;
 }
 
 
 .paragraph-title {
     font-size: 1.3rem;
-    color: #a900a9;
+    color: var(--color-primary);
     margin-bottom: 8px;
     font-weight: 600;
     line-height: 1.1;
@@ -102,7 +102,7 @@
     max-height: 600px;
     margin: 16px auto 0 auto;
     border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(169, 0, 169, 0.08);
+    box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.08);
     transition: transform 0.2s;
 }
 

@@ -16,7 +16,7 @@ mat-card-header {
 
     mat-card-title {
         font-size: 1.8rem;
-        color: #a900a9;
+        color: var(--color-primary);
     }
 }
 
@@ -31,13 +31,13 @@ mat-card-content {
         }
 
         .form-array-container {
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--color-gray-300);
             border-radius: 8px;
             padding: 1.5rem;
 
             h3 {
                 margin: 0 0 1rem 0;
-                color: #333;
+                color: var(--color-gray-800);
                 font-size: 1.2rem;
             }
 
@@ -57,7 +57,7 @@ mat-card-content {
                             display: block;
                             margin-bottom: 0.5rem;
                             font-weight: 500;
-                            color: #666;
+                            color: var(--color-text-secondary);
                         }
 
                         button[mat-raised-button] {
@@ -106,7 +106,7 @@ mat-card-content {
         }
 
         .main-image-upload {
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--color-gray-300);
             border-radius: 8px;
             padding: 1.5rem;
 
@@ -118,7 +118,7 @@ mat-card-content {
             }
 
             .upload-hint {
-                color: #666;
+                color: var(--color-text-secondary);
                 font-size: 0.875rem;
                 margin-bottom: 1rem;
             }

@@ -68,11 +68,11 @@
 
 .recipe-image.placeholder {
   height: 200px;
-  background-color: #f8f9fa;
+  background-color: var(--color-gray-50);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #6c757d;
+  color: var(--color-text-muted);
 }
 
 .recipe-meta {
@@ -80,7 +80,7 @@
   justify-content: space-between;
   margin-top: 16px;
   font-size: 0.8rem;
-  color: #666;
+  color: var(--color-text-secondary);
 }
 
 .add-recipe-container {
@@ -93,22 +93,22 @@
   padding: 40px;
   text-align: center;
   font-size: 1.2rem;
-  color: #6c757d;
+  color: var(--color-text-muted);
 }
 
 .error {
-  color: #dc3545;
+  color: var(--color-error);
 }
 
 .recipe-count {
   margin: 10px 0;
   font-size: 16px;
-  color: #6c757d;
+  color: var(--color-text-muted);
 }
 
 .recipe-subtitle {
   font-size: 16px;
-  color: #6a6e72;
+  color: var(--color-text-muted);
 }
 
 .no-recipes {
@@ -117,7 +117,7 @@
 
   p {
     margin-bottom: 1rem;
-    color: #666;
+    color: var(--color-text-secondary);
   }
 
   .add-recipe-button {
@@ -128,10 +128,10 @@
     text-transform: none;
     letter-spacing: 0.5px;
     border-radius: 12px;
-    background: linear-gradient(135deg, #a900a9 0%, #e7c8f8 100%);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
     color: white;
     border: none;
-    box-shadow: 0 8px 25px rgba(169, 0, 169, 0.3);
+    box-shadow: 0 8px 25px rgba(var(--color-primary-rgb), 0.3);
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
     position: relative;
@@ -150,8 +150,8 @@
 
     &:hover {
       transform: translateY(-3px) scale(1.02);
-      background: linear-gradient(135deg, #8b008b 0%, #d8b4fe 100%);
-      box-shadow: 0 15px 35px rgba(169, 0, 169, 0.4);
+      background: linear-gradient(135deg, var(--color-primary-darker) 0%, var(--color-primary-light) 100%);
+      box-shadow: 0 15px 35px rgba(var(--color-primary-rgb), 0.4);
 
       &::before {
         left: 100%;
@@ -160,7 +160,7 @@
 
     &:active {
       transform: translateY(-1px) scale(0.98);
-      box-shadow: 0 5px 15px rgba(169, 0, 169, 0.3);
+      box-shadow: 0 5px 15px rgba(var(--color-primary-rgb), 0.3);
     }
   }
 }
@@ -173,19 +173,19 @@
     display: flex;
     align-items: center;
     margin-bottom: 4px;
-    color: #495057;
+    color: var(--color-text-body);
 
     strong {
-      color: #343a40;
+      color: var(--color-gray-800);
       margin-right: 4px;
     }
   }
 }
 
 .filters-section {
-  background: #f8f9fa;
+  background: var(--color-gray-50);
   border-radius: 8px;
-  border: 1px solid #e9ecef;
+  border: 1px solid var(--color-gray-200);
   visibility: hidden;
 }
 
@@ -281,17 +281,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #a900a9 0%, #c44dc4 100%);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
   color: white;
   border: none;
   border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(169, 0, 169, 0.3);
+  box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.3);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   padding: 0;
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(169, 0, 169, 0.4);
+    box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.4);
   }
 }
 
@@ -312,7 +312,7 @@
     font-size: 26px;
     width: 26px;
     height: 26px;
-    color: #a900a9;
+    color: var(--color-primary);
     margin: 0 auto;
   }
 }
@@ -324,24 +324,24 @@
 }
 
 .status-pending {
-  background-color: #fff3cd;
-  color: #856404;
+  background-color: var(--color-warning-surface);
+  color: var(--color-warning-on);
   border-radius: 4px;
   padding: 2px 8px 2px 3px;
   margin-left: 10px;
 }
 
 .status-active {
-  background-color: #d4edda;
-  color: #155724;
+  background-color: var(--color-success-surface);
+  color: var(--color-success-on);
   border-radius: 4px;
   padding: 2px 8px 2px 3px;
   margin-left: 10px;
 }
 
 .status-rejected {
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: var(--color-error-surface);
+  color: var(--color-error-on);
   border-radius: 4px;
   padding: 2px 8px 2px 3px;
   margin-left: 10px;
@@ -397,13 +397,13 @@
 }
 
 .creator-link {
-  color: #a900a9;
+  color: var(--color-primary);
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
 
   &:hover {
-    color: #d100d1;
+    color: var(--color-primary-dark);
   }
 }
 

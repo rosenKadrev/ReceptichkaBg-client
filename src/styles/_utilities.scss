@@ -1,0 +1,28 @@
+// ─── Spacing tokens ───────────────────────────────────────────────────────────
+$spacing-8:  8px;
+$spacing-10: 10px;
+$spacing-20: 20px;
+
+// ─── Typography tokens ────────────────────────────────────────────────────────
+$font-size-sm:      14px;
+$font-size-md:      18px;
+$font-weight-medium: 500;
+
+// ─── Layout ───────────────────────────────────────────────────────────────────
+.d-flex       { display: flex; }
+.flex-grow-1  { flex-grow: 1; }
+.j-content-center { justify-content: center; }
+.a-items-center   { align-items: center; }
+.w-100        { width: 100%; }
+
+// ─── Typography ───────────────────────────────────────────────────────────────
+.fs-14 { font-size: $font-size-sm; }
+.fs-18 { font-size: $font-size-md; }
+.fw-5  { font-weight: $font-weight-medium; }
+
+// ─── Spacing ──────────────────────────────────────────────────────────────────
+.pt-10 { padding-top:    $spacing-10; }
+.pl-10 { padding-left:   $spacing-10; }
+.pt-20 { padding-top:    $spacing-20; }
+.mb-20 { margin-bottom:  $spacing-20; }
+.mr-8  { margin-right:   $spacing-8; }

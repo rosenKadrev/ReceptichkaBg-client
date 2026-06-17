@@ -7,14 +7,14 @@
     h1 {
       font-size: 32px;
       font-weight: 600;
-      color: #2c3e50;
+      color: var(--color-text-heading);
       margin: 0;
       line-height: 1.2;
     }
 
     .category-description {
       font-size: 16px;
-      color: #6c757d;
+      color: var(--color-text-muted);
       max-width: 700px;
       line-height: 1.2;
       margin-bottom: 0;
@@ -81,7 +81,7 @@
           font-size: 20px;
           font-weight: 500;
           line-height: 1.2;
-          color: #2c3e50;
+          color: var(--color-text-heading);
           -webkit-line-clamp: 2;
           line-clamp: 2;
           display: -webkit-box;
@@ -92,7 +92,7 @@
         .article-meta {
           margin: 0;
           font-size: 14px;
-          color: #6c757d;
+          color: var(--color-text-muted);
 
           .date {
             display: inline-flex;
@@ -114,7 +114,7 @@
 
       .article-excerpt {
         margin: 0;
-        color: #6c757d;
+        color: var(--color-text-muted);
         line-height: 1.2;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -129,11 +129,11 @@
 .no-articles {
   text-align: center;
   padding: 40px 20px;
-  color: #6c757d;
+  color: var(--color-text-muted);
   font-size: 16px;
   border-radius: 8px;
   margin: 20px 0 0;
-  background: #f8f9fa;
+  background: var(--color-gray-50);
 }
 
 @media (max-width: 600px) {

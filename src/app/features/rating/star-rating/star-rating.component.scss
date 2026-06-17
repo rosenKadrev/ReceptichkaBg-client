@@ -24,14 +24,14 @@
     }
 
     .star-icon {
-        color: #e0e0e0;
+        color: var(--color-star-empty);
         transition: all 0.2s ease;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &.star-active {
-            color: #ffc107;
+            color: var(--color-star-filled);
         }
     }
 }

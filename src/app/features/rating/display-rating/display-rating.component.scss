@@ -15,23 +15,23 @@
         justify-content: center;
 
         &.filled {
-            color: #ffc107;
+            color: var(--color-star-filled);
         }
 
         &.empty {
-            color: #e0e0e0;
+            color: var(--color-star-empty);
         }
     }
 
     .rating-value {
         font-weight: 600;
         font-size: 1rem;
-        color: #495057;
+        color: var(--color-text-body);
     }
 
     .rating-count {
         font-size: 0.875rem;
-        color: #495057;
+        color: var(--color-text-body);
     }
 }
 

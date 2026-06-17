@@ -12,7 +12,7 @@
     }
 
     &.favorite-active {
-        color: #a900a9;
+        color: var(--color-primary);
 
         mat-icon {
             animation: heartBeat 0.3s ease-in-out;
@@ -23,7 +23,7 @@
         color: rgba(0, 0, 0, 0.54);
 
         &:hover {
-            color: #a900a9;
+            color: var(--color-primary);
         }
     }
 }

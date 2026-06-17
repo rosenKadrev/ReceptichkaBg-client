@@ -1,4 +1,10 @@
 @use '@angular/material' as mat;
+@use './styles/colors' as c;
+@use './styles/utilities';
+
+:root {
+    @include c.define-css-vars();
+}
 
 html {
     @include mat.theme((color: (primary: mat.$magenta-palette,
@@ -21,85 +27,32 @@ body {
     height: 100%;
 }
 
-.d-flex {
-    display: flex;
-}
-
-.flex-grow-1 {
-    flex-grow: 1;
-}
-
-.j-content-center {
-    justify-content: center;
-}
-
-.a-items-center {
-    align-items: center;
-}
-
-.fs-14 {
-    font-size: 14px;
-}
-
-.fs-18 {
-    font-size: 18px;
-}
-
-.fw-5 {
-    font-weight: 500;
-}
-
-
-.pt-10 {
-    padding-top: 10px;
-}
-
-.pl-10 {
-    padding-left: 10px;
-}
-
-.pt-20 {
-    padding-top: 20px;
-}
-
-.mb-20 {
-    margin-bottom: 20px;
-}
-
-.mr-8 {
-    margin-right: 8px;
-}
-
-.w-100 {
-    width: 100%;
-}
-
 // Toast/Snackbar customization using Material's official mixin
 .success-snackbar {
-    @include mat.snack-bar-overrides((container-color: #4caf50,
-            button-color: white,
-            supporting-text-color: white,
+    @include mat.snack-bar-overrides((container-color: c.$success,
+            button-color: c.$white,
+            supporting-text-color: c.$white,
         ));
 }
 
 .error-snackbar {
-    @include mat.snack-bar-overrides((container-color: #f44336,
-            button-color: white,
-            supporting-text-color: white,
+    @include mat.snack-bar-overrides((container-color: c.$error,
+            button-color: c.$white,
+            supporting-text-color: c.$white,
         ));
 }
 
 .info-snackbar {
-    @include mat.snack-bar-overrides((container-color: #2196f3,
-            button-color: white,
-            supporting-text-color: white,
+    @include mat.snack-bar-overrides((container-color: c.$info,
+            button-color: c.$white,
+            supporting-text-color: c.$white,
         ));
 }
 
 .warning-snackbar {
-    @include mat.snack-bar-overrides((container-color: #ff9800,
-            button-color: white,
-            supporting-text-color: white,
+    @include mat.snack-bar-overrides((container-color: c.$warning,
+            button-color: c.$white,
+            supporting-text-color: c.$white,
         ));
 }
 

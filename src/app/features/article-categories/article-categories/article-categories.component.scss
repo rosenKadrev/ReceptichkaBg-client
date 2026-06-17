@@ -8,14 +8,14 @@
   h1 {
     font-size: 32px;
     font-weight: 600;
-    color: #2c3e50;
+    color: var(--color-text-heading);
     margin: 0;
     line-height: 1.2;
   }
 
   .description {
     font-size: 16px;
-    color: #6c757d;
+    color: var(--color-text-muted);
     max-width: 700px;
     line-height: 1.2;
     margin-bottom: 0;
@@ -104,13 +104,13 @@
     margin: 0 0 8px 0;
     font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: var(--color-gray-800);
     line-height: 20.8px;
   }
 
   p {
     margin: 0;
-    color: #666;
+    color: var(--color-text-secondary);
     font-size: 14px;
   }
 }
@@ -119,11 +119,11 @@
   grid-column: 1 / -1;
   text-align: center;
   padding: 40px 20px;
-  color: #6c757d;
+  color: var(--color-text-muted);
   font-size: 16px;
   border-radius: 8px;
   margin: 20px 0 0;
-  background: #f8f9fa;
+  background: var(--color-gray-50);
 }
 
 .category-card.disabled {

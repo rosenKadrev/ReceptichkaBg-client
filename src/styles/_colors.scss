@@ -1,0 +1,184 @@
+// ─── Brand / Primary ──────────────────────────────────────────────────────────
+$primary:           #a900a9;
+$primary-light:     #e7c8f8;
+$primary-lighter:   #f3e7ff;
+$primary-dark:      #d100d1;
+$primary-darker:    #8a008a;
+$primary-muted:     #d4c4f0;
+$primary-hover-bg:  #f1e7f1;   // table row hover
+
+// ─── Status – Success ─────────────────────────────────────────────────────────
+$success:           #4caf50;
+$success-surface:   #e8f5e9;
+$success-on:        #2e7d32;
+
+// ─── Status – Error ───────────────────────────────────────────────────────────
+$error:             #f44336;
+$error-surface:     #ffebee;
+$error-on:          #c62828;
+
+// ─── Status – Warning ─────────────────────────────────────────────────────────
+$warning:           #ff9800;
+$warning-surface:   #fff8e1;
+$warning-on:        #ff8f00;
+
+// ─── Status – Info ────────────────────────────────────────────────────────────
+$info:              #2196f3;
+$info-surface:      #e3f2fd;
+
+// ─── Neutral ──────────────────────────────────────────────────────────────────
+$white:             #ffffff;
+$gray-50:           #f8f9fa;
+$gray-100:          #f1f1f1;
+$gray-200:          #e9ecef;
+$gray-300:          #dee2e6;
+$gray-400:          #cccccc;
+$gray-500:          #adb5bd;
+$gray-600:          #6c757d;
+$gray-700:          #495057;
+$gray-800:          #343a40;
+$gray-900:          #222222;
+
+// ─── Text ─────────────────────────────────────────────────────────────────────
+$text-heading:      #2c3e50;
+$text-body:         #495057;
+$text-secondary:    #666666;
+$text-muted:        #6c757d;
+$text-light:        #888888;
+
+// ─── Signup / OAuth ───────────────────────────────────────────────────────────
+$signup:            #24a16d;
+$signup-dark:       #2d8e47;
+$signup-darker:     #1f6934;
+$signup-light:      #64bb97;   // disabled state
+
+$google-border:     #dadce0;
+$google-text:       #3c4043;
+
+// ─── Stars / Rating ───────────────────────────────────────────────────────────
+$star-filled:       #ffc107;
+$star-empty:        #e0e0e0;
+
+// ─── Gradients ────────────────────────────────────────────────────────────────
+$gradient-indigo:   #667eea;
+$gradient-purple:   #764ba2;
+$gradient-pink:     #f093fb;
+$gradient-sky:      #4facfe;
+
+// ─── Profile palette ──────────────────────────────────────────────────────────
+$profile-bg:        #faf7ff;
+$profile-border:    #efe9fb;
+$profile-surface-2: #e9d8ff;
+$profile-surface-3: #e3d4f7;
+$profile-text-dark: #2f2445;
+$profile-text:      #5f2f88;
+$profile-text-mid:  #7b52a5;
+$profile-text-sub:  #6f6290;
+$profile-text-hint: #796794;
+$profile-text-dim:  #a6a0b1;
+$profile-icon:      #b39acb;
+
+// ─── Avatar ───────────────────────────────────────────────────────────────────
+$avatar-ring:       #b6b8bc;
+$avatar-icon:       #c0c6cb;
+
+// ─── Skeleton shimmer ─────────────────────────────────────────────────────────
+$skeleton-base:      #f0e6f6;
+$skeleton-highlight: #e5d3ef;
+
+// ─── Accent / Indigo ──────────────────────────────────────────────────────────
+$indigo:            #3f51b5;
+$indigo-dark:       #303f9f;
+
+// ─── CSS Custom Properties Mixin ──────────────────────────────────────────────
+// Include this once in :root. Every component can then use var(--color-*).
+@mixin define-css-vars() {
+    // Brand
+    --color-primary:            #{$primary};
+    --color-primary-rgb:        169, 0, 169;
+    --color-primary-light:      #{$primary-light};
+    --color-primary-lighter:    #{$primary-lighter};
+    --color-primary-dark:       #{$primary-dark};
+    --color-primary-darker:     #{$primary-darker};
+    --color-primary-muted:      #{$primary-muted};
+    --color-primary-hover-bg:   #{$primary-hover-bg};
+
+    // Status
+    --color-success:            #{$success};
+    --color-success-surface:    #{$success-surface};
+    --color-success-on:         #{$success-on};
+
+    --color-error:              #{$error};
+    --color-error-surface:      #{$error-surface};
+    --color-error-on:           #{$error-on};
+
+    --color-warning:            #{$warning};
+    --color-warning-surface:    #{$warning-surface};
+    --color-warning-on:         #{$warning-on};
+
+    --color-info:               #{$info};
+    --color-info-surface:       #{$info-surface};
+
+    // Neutral
+    --color-white:              #{$white};
+    --color-gray-50:            #{$gray-50};
+    --color-gray-100:           #{$gray-100};
+    --color-gray-200:           #{$gray-200};
+    --color-gray-300:           #{$gray-300};
+    --color-gray-400:           #{$gray-400};
+    --color-gray-500:           #{$gray-500};
+    --color-gray-600:           #{$gray-600};
+    --color-gray-700:           #{$gray-700};
+    --color-gray-800:           #{$gray-800};
+    --color-gray-900:           #{$gray-900};
+
+    // Text
+    --color-text-heading:       #{$text-heading};
+    --color-text-body:          #{$text-body};
+    --color-text-secondary:     #{$text-secondary};
+    --color-text-muted:         #{$text-muted};
+    --color-text-light:         #{$text-light};
+
+    // Signup / OAuth
+    --color-signup:             #{$signup};
+    --color-signup-dark:        #{$signup-dark};
+    --color-signup-darker:      #{$signup-darker};
+    --color-signup-light:       #{$signup-light};
+    --color-google-border:      #{$google-border};
+    --color-google-text:        #{$google-text};
+
+    // Stars
+    --color-star-filled:        #{$star-filled};
+    --color-star-empty:         #{$star-empty};
+
+    // Gradients
+    --color-gradient-indigo:    #{$gradient-indigo};
+    --color-gradient-purple:    #{$gradient-purple};
+    --color-gradient-pink:      #{$gradient-pink};
+    --color-gradient-sky:       #{$gradient-sky};
+
+    // Profile
+    --color-profile-bg:         #{$profile-bg};
+    --color-profile-border:     #{$profile-border};
+    --color-profile-surface-2:  #{$profile-surface-2};
+    --color-profile-surface-3:  #{$profile-surface-3};
+    --color-profile-text-dark:  #{$profile-text-dark};
+    --color-profile-text:       #{$profile-text};
+    --color-profile-text-mid:   #{$profile-text-mid};
+    --color-profile-text-sub:   #{$profile-text-sub};
+    --color-profile-text-hint:  #{$profile-text-hint};
+    --color-profile-text-dim:   #{$profile-text-dim};
+    --color-profile-icon:       #{$profile-icon};
+
+    // Avatar
+    --color-avatar-ring:        #{$avatar-ring};
+    --color-avatar-icon:        #{$avatar-icon};
+
+    // Skeleton
+    --color-skeleton-base:      #{$skeleton-base};
+    --color-skeleton-highlight: #{$skeleton-highlight};
+
+    // Accent
+    --color-indigo:             #{$indigo};
+    --color-indigo-dark:        #{$indigo-dark};
+}
