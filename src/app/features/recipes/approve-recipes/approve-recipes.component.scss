@@ -125,7 +125,7 @@ tr.element-row:hover {
 }
 
 .expanded-columns>div {
-    background: var(--color-white);
+    background: var(--color-gray-100);
     border-radius: 8px;
     padding: 12px 14px;
     box-shadow: 0 1px 4px rgba(var(--color-primary-rgb), 0.04);
@@ -159,7 +159,7 @@ tr.element-row:hover {
     border-radius: 6px;
     box-shadow: 0 2px 8px rgba(var(--color-primary-rgb), 0.08);
     border: 1px solid var(--color-primary-light);
-    background: var(--color-white);
+    background: var(--color-gray-100);
 }
 
 .header-filter {

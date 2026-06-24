@@ -36,6 +36,7 @@
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
     overflow: hidden;
+    background-color: var(--color-recie-card-bg);
 
     &:hover {
       transform: translateY(-3px);

@@ -20,7 +20,7 @@
     }
 
     &:not(.favorite-active) {
-        color: rgba(0, 0, 0, 0.54);
+        color: var(--color-gray-500);
 
         &:hover {
             color: var(--color-primary);

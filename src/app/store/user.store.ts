@@ -93,6 +93,7 @@ export const UserStore = signalStore(
                   token: response.data.token,
                   loading: false,
                 });
+                applyDarkMode(response.data.user);
                 toastService.showSuccess(response.message);
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
@@ -127,6 +128,7 @@ export const UserStore = signalStore(
                   token: response.data.token,
                   loading: false,
                 });
+                applyDarkMode(response.data.user);
                 toastService.showSuccess(response.message);
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
@@ -203,9 +205,14 @@ export const UserStore = signalStore(
         )
       );
 
+      const applyDarkMode = (user: User) => {
+        document.documentElement.classList.toggle('dark', !!user.darkMode);
+      };
+
       const logout = () => {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
+        document.documentElement.classList.remove('dark');
         patchState(store, initialState);
         tokenExpirationService.stopTokenExpirationCheck();
         favoriteStore.clearFavorites();
@@ -392,6 +399,25 @@ export const UserStore = signalStore(
         patchState(store, { selectedProfile: null });
       };
 
+      const toggleDarkMode = rxMethod<boolean>(
+        pipe(
+          switchMap((darkMode) =>
+            userService.updateDarkMode(store.user()!.id, darkMode).pipe(
+              tap((response: DataResponse<User>) => {
+                const updatedUserMode = { ...store.user()!, ...response.data };
+                localStorage.setItem('user', JSON.stringify(updatedUserMode));
+                patchState(store, { user: updatedUserMode });
+              }),
+              catchError((error: HttpErrorResponse) => {
+                const errorMessage = error.error?.message;
+                toastService.showError(errorMessage);
+                return of(null);
+              })
+            )
+          )
+        )
+      );
+
       const googleLogin = rxMethod<string>(
         pipe(
           tap(() => patchState(store, { loading: true, error: null })),
@@ -405,6 +431,7 @@ export const UserStore = signalStore(
                   token: response.data.token,
                   loading: false,
                 });
+                applyDarkMode(response.data.user);
                 toastService.showSuccess(response.message);
                 tokenExpirationService.startTokenExpirationCheck(() => {
                   patchState(store, initialState);
@@ -443,7 +470,8 @@ export const UserStore = signalStore(
         setParams,
         clearUsers,
         clearParams,
-        clearSelectedProfile
+        clearSelectedProfile,
+        toggleDarkMode
       };
     }
   ),
@@ -452,7 +480,9 @@ export const UserStore = signalStore(
       const token = localStorage.getItem('token');
       const user = localStorage.getItem('user');
       if (token && user) {
-        patchState(store, { user: JSON.parse(user), token });
+        const parsedUser = JSON.parse(user);
+        patchState(store, { user: parsedUser, token });
+        document.documentElement.classList.toggle('dark', !!parsedUser.darkMode);
         tokenExpirationService.startTokenExpirationCheck(() => {
           patchState(store, initialState);
         });

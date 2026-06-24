@@ -19,6 +19,7 @@ export interface User {
   role?: string;
   recipesCount?: number;
   receivedRating?: ReceivedRating;
+  darkMode: boolean;
 }
 
 export interface ReceivedRating {

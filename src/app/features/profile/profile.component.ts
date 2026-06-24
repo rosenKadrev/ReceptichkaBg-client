@@ -12,6 +12,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatSpinner } from '@angular/material/progress-spinner';
+import { MatSlideToggle } from '@angular/material/slide-toggle';
 import { UserStore } from '../../store/user.store';
 import { TextInputComponent } from '../auth/forms/text-input/text-input.component';
 import { DatePickerComponent } from '../auth/forms/date-picker/date-picker.component';
@@ -28,6 +29,7 @@ import { RecipeStore } from '../../store/recipe.store';
     MatButton,
     MatIcon,
     MatSpinner,
+    MatSlideToggle,
     TextInputComponent,
     DatePickerComponent,
     SelectInputComponent,
@@ -129,6 +131,13 @@ export class ProfileComponent implements OnInit, OnDestroy {
   private getDateOnly(dob: string | undefined) {
     if (!dob) return;
     return new Date(dob).toISOString().slice(0, 10);
+  }
+
+  toggleDarkMode(): void {
+    const current = this.userStore.user()?.darkMode ?? false;
+    const next = !current;
+    document.documentElement.classList.toggle('dark', next);
+    this.userStore.toggleDarkMode(next);
   }
 
   canViewCreatorRecipes(): boolean {
