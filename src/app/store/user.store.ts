@@ -96,7 +96,7 @@ export const UserStore = signalStore(
                 applyDarkMode(response.data.user);
                 toastService.showSuccess(response.message);
                 tokenExpirationService.startTokenExpirationCheck(() => {
-                  patchState(store, initialState);
+                  logout();
                 });
               }),
               catchError((error: HttpErrorResponse) => {
@@ -131,7 +131,7 @@ export const UserStore = signalStore(
                 applyDarkMode(response.data.user);
                 toastService.showSuccess(response.message);
                 tokenExpirationService.startTokenExpirationCheck(() => {
-                  patchState(store, initialState);
+                  logout();
                 });
               }),
               catchError((error: HttpErrorResponse) => {
@@ -434,7 +434,7 @@ export const UserStore = signalStore(
                 applyDarkMode(response.data.user);
                 toastService.showSuccess(response.message);
                 tokenExpirationService.startTokenExpirationCheck(() => {
-                  patchState(store, initialState);
+                  logout();
                 });
               }),
               catchError((error: HttpErrorResponse) => {
@@ -484,7 +484,7 @@ export const UserStore = signalStore(
         patchState(store, { user: parsedUser, token });
         document.documentElement.classList.toggle('dark', !!parsedUser.darkMode);
         tokenExpirationService.startTokenExpirationCheck(() => {
-          patchState(store, initialState);
+          store.logout();
         });
       }
     },
