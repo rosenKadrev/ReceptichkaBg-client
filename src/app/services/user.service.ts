@@ -50,4 +50,8 @@ export class UserService {
   getProfileById(userId: string): Observable<DataResponse<User>> {
     return this.http.get<DataResponse<User>>(`${this.apiUrl}/profile/${userId}`);
   }
+
+  updateDarkMode(userId: string, darkMode: boolean): Observable<DataResponse<User>> {
+    return this.http.patch<DataResponse<User>>(`${this.apiUrl}/${userId}/dark-mode`, { darkMode });
+  }
 }

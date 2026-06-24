@@ -48,6 +48,18 @@
                  [maxDate]="maxDate"
                  [minDate]="minDate"
                  [hint]="'MM/DD/YYYY'"></date-picker>
+    <div class="theme-toggle-row">
+      <mat-icon>{{ userStore.user()?.darkMode ? 'dark_mode' : 'light_mode' }}</mat-icon>
+      <div class="theme-toggle-label">
+        <span>Тъмен режим</span>
+        <span class="theme-toggle-hint">Прилага се веднага, без да запазвате промени в профила</span>
+      </div>
+      <mat-slide-toggle
+        [checked]="userStore.user()?.darkMode ?? false"
+        (change)="toggleDarkMode()">
+      </mat-slide-toggle>
+    </div>
+
     @if (isOwnProfile()) {
     <button mat-flat-button
             color="primary"
