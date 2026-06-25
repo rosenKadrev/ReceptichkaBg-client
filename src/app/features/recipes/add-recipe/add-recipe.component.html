@@ -206,6 +206,11 @@
         </button>
 
       </form>
+
+      @if (!isEditMode()) {
+      <app-recipe-bulk-import></app-recipe-bulk-import>
+      }
+
     </mat-card-content>
   </mat-card>
 </div>

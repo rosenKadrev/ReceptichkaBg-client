@@ -19,7 +19,7 @@
 
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px var(--color-shadow-md);
   }
 
   img[mat-card-image] {
@@ -69,11 +69,26 @@
 
 .recipe-image.placeholder {
   height: 200px;
-  background-color: var(--color-gray-50);
+  background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-muted);
+  gap: 0.5rem;
+
+  .placeholder-icon {
+    font-size: 3rem;
+    width: 3rem;
+    height: 3rem;
+    color: var(--color-gray-400);
+    opacity: 0.6;
+  }
+
+  .placeholder-text {
+    font-size: 0.85rem;
+    color: var(--color-gray-500);
+    letter-spacing: 0.03em;
+  }
 }
 
 .recipe-meta {

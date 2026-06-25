@@ -10,7 +10,7 @@
 
 .app-header {
   background-color: var(--color-primary-light);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px var(--color-shadow-sm);
   padding: 8px 0;
   height: 50px;
 

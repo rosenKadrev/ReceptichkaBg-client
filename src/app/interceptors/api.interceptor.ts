@@ -4,23 +4,21 @@ import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
 import { UserStore } from '../store/user.store';
 
-export const httpErrorInterceptor: HttpInterceptorFn = (req, next) => {
+export const apiInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const userStore = inject(UserStore);
 
-  return next(req).pipe(
+  const token = localStorage.getItem('token');
+  const authedReq = token
+    ? req.clone({ setHeaders: { Authorization: `Bearer ${token}` } })
+    : req;
+
+  return next(authedReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      console.log('HTTP Error Interceptor:', error);
-
       if (error.status === 401) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
-
         userStore.logout();
-
         router.navigate(['/login']);
       }
-
       return throwError(() => error);
     })
   );

@@ -1,0 +1,65 @@
+<div class="bulk-import">
+  <div class="bulk-import-header">
+    <mat-icon>table_view</mat-icon><span>Добавяне на повече от една рецепта с Excel</span>
+  </div>
+  <p class="bulk-import-hint">
+    Изтеглете шаблона, попълнете рецептите и го качете обратно.
+    Съставките се записват, като <code>продукт:количество:мерна единица</code>
+    , а стъпките с <code>|</code> между тях.
+  </p>
+  <div class="bulk-import-actions">
+    <button mat-stroked-button
+            color="primary"
+            type="button"
+            (click)="downloadTemplate()"
+            [disabled]="!recipeStore.lookups()">
+      <mat-icon>download</mat-icon>
+      Изтегли шаблон
+    </button>
+
+    <input type="file"
+           #excelInput
+           accept=".xlsx,.xls"
+           style="display:none"
+           (change)="onImportExcel($event)">
+
+    <button mat-raised-button
+            color="accent"
+            type="button"
+            (click)="excelInput.click()"
+            [disabled]="isImporting()">
+      <mat-icon>upload_file</mat-icon>
+      Качи Excel файл
+    </button>
+  </div>
+
+  @if (isImporting()) {
+  <div class="import-progress">
+    <p>Добавяне на рецепта {{ importProgress() }} от {{ importTotal() }}...</p>
+    <mat-progress-bar mode="determinate"
+                      [value]="(importProgress() / importTotal()) * 100">
+    </mat-progress-bar>
+  </div>
+  }
+
+  @if (!isImporting() && (importProgress() > 0 || importErrors().length > 0)) {
+  <div class="import-result">
+    @if (importProgress() > 0) {
+    <p class="import-success">
+      <mat-icon>check_circle</mat-icon>
+      <span>{{ importProgress() - importErrors().length }} от {{ importTotal() }} рецепти добавени успешно.</span>
+    </p>
+    }
+    @if (importErrors().length > 0) {
+    <div class="import-errors">
+      <p><mat-icon>error</mat-icon><span>{{ importProgress() > 0 ? 'Грешки при качване:' : 'Файлът съдържа грешки - моля оправете ги и опитайте отново:' }}</span></p>
+      <ul>
+        @for (err of importErrors(); track $index) {
+        <li>{{ err }}</li>
+        }
+      </ul>
+    </div>
+    }
+  </div>
+  }
+</div>
