@@ -191,9 +191,12 @@ $indigo-dark:       #303f9f;
     --color-favorite-btn-bg-hover:  rgba(30, 30, 50, 1);
 
     // Shadows
-    --color-shadow-sm:   rgba(0, 0, 0, 0.25);
-    --color-shadow-md:   rgba(0, 0, 0, 0.35);
-    --color-shadow-lg:   rgba(0, 0, 0, 0.45);
+    --color-shadow-sm:              rgba(0, 0, 0, 0.25);
+    --color-shadow-md:              rgba(0, 0, 0, 0.35);
+    --color-shadow-lg:              rgba(0, 0, 0, 0.45);
+    --color-shadow-overlay:         rgba(0, 0, 0, 0.6);
+    --color-shadow-profile-card:    rgba(83, 39, 120, 0.18);
+    --color-shadow-profile-avatar:  rgba(136, 71, 192, 0.28);
 }
 
 // ─── CSS Custom Properties Mixin ──────────────────────────────────────────────
@@ -298,7 +301,10 @@ $indigo-dark:       #303f9f;
     --color-favorite-btn-bg-hover:  rgba(255, 255, 255, 1);
 
     // Shadows
-    --color-shadow-sm:   rgba(0, 0, 0, 0.1);
-    --color-shadow-md:   rgba(0, 0, 0, 0.15);
-    --color-shadow-lg:   rgba(0, 0, 0, 0.15);
+    --color-shadow-sm:              rgba(0, 0, 0, 0.1);
+    --color-shadow-md:              rgba(0, 0, 0, 0.15);
+    --color-shadow-lg:              rgba(0, 0, 0, 0.15);
+    --color-shadow-overlay:         rgba(0, 0, 0, 0.5);
+    --color-shadow-profile-card:    rgba(83, 39, 120, 0.08);
+    --color-shadow-profile-avatar:  rgba(136, 71, 192, 0.18);
 }
