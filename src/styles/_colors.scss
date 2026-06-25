@@ -185,6 +185,15 @@ $indigo-dark:       #303f9f;
 
     // Recipes
     --color-recie-card-bg:      #2e2e42;
+
+    // Favorite button
+    --color-favorite-btn-bg:        rgba(30, 30, 50, 0.85);
+    --color-favorite-btn-bg-hover:  rgba(30, 30, 50, 1);
+
+    // Shadows
+    --color-shadow-sm:   rgba(0, 0, 0, 0.25);
+    --color-shadow-md:   rgba(0, 0, 0, 0.35);
+    --color-shadow-lg:   rgba(0, 0, 0, 0.45);
 }
 
 // ─── CSS Custom Properties Mixin ──────────────────────────────────────────────
@@ -283,4 +292,13 @@ $indigo-dark:       #303f9f;
 
     // Recipes
     --color-recie-card-bg:      #{$profile-bg};
+
+    // Favorite button
+    --color-favorite-btn-bg:        rgba(255, 255, 255, 0.95);
+    --color-favorite-btn-bg-hover:  rgba(255, 255, 255, 1);
+
+    // Shadows
+    --color-shadow-sm:   rgba(0, 0, 0, 0.1);
+    --color-shadow-md:   rgba(0, 0, 0, 0.15);
+    --color-shadow-lg:   rgba(0, 0, 0, 0.15);
 }

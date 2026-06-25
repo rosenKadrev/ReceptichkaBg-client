@@ -203,7 +203,7 @@
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--color-shadow-sm);
     background: var(--color-recie-card-bg);
     display: flex;
     flex-direction: column;
@@ -215,7 +215,7 @@
     @media (hover: hover) {
         &:hover {
             transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 12px 24px var(--color-shadow-md);
 
             .recipe-image {
                 transform: scale(1.05);
@@ -250,9 +250,9 @@
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--color-favorite-btn-bg);
             backdrop-filter: blur(10px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 12px var(--color-shadow-md);
             transition: all 0.3s ease;
             z-index: 2;
 
@@ -285,7 +285,7 @@
             @media (hover: hover) {
                 &:hover {
                     transform: scale(1.1);
-                    background: rgba(255, 255, 255, 1);
+                    background: var(--color-favorite-btn-bg-hover);
                 }
             }
 
