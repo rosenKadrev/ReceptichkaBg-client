@@ -13,6 +13,7 @@ import { RecipeStore } from '../../../store/recipe.store';
 import { MatSpinner } from '@angular/material/progress-spinner';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../../store/models/data.models';
+import { RecipeBulkImportComponent } from './recipe-bulk-import/recipe-bulk-import.component';
 
 @Component({
   selector: 'app-add-recipe',
@@ -29,6 +30,7 @@ import { Recipe } from '../../../store/models/data.models';
     TextInputComponent,
     TextareaInputComponent,
     MatSpinner,
+    RecipeBulkImportComponent,
   ],
   templateUrl: './add-recipe.component.html',
   styleUrls: ['./add-recipe.component.scss'],
@@ -89,16 +91,11 @@ export class AddRecipeComponent implements OnInit {
     while (this.instructions.length) this.instructions.removeAt(0);
 
     const categoryId =
-      this.recipeStore.lookups()?.categories.find((type) => type.name === recipe.category)?.id ||
-      '';
+      this.recipeStore.lookups()?.categories.find((type) => type.name === recipe.category)?.id || '';
     const processingTypeId =
-      this.recipeStore
-        .lookups()
-        ?.processingTypes.find((type) => type.name === recipe.typeOfProcessing)?.id || '';
+      this.recipeStore.lookups()?.processingTypes.find((type) => type.name === recipe.typeOfProcessing)?.id || '';
     const difficultyId =
-      this.recipeStore
-        .lookups()
-        ?.degreeOfDifficulty.find((dif) => dif.name === recipe.degreeOfDifficulty)?.id || '';
+      this.recipeStore.lookups()?.degreeOfDifficulty.find((dif) => dif.name === recipe.degreeOfDifficulty)?.id || '';
 
     this.recipeForm.patchValue({
       name: recipe.name,
@@ -121,9 +118,7 @@ export class AddRecipeComponent implements OnInit {
 
     if (recipe.images && recipe.images.length > 0) {
       this.imagePreview = recipe.images[0].imageUrl;
-      this.recipeForm.patchValue({
-        imageUrl: recipe.images[0].imageUrl,
-      });
+      this.recipeForm.patchValue({ imageUrl: recipe.images[0].imageUrl });
     }
   }
 
@@ -188,15 +183,11 @@ export class AddRecipeComponent implements OnInit {
     this.selectedFile = null;
     this.recipeForm.get('imageUrl')?.setValue('');
     const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.value = '';
-    }
+    if (fileInput) fileInput.value = '';
   }
 
   onSubmit(): void {
-    if (this.recipeForm.invalid) {
-      return;
-    }
+    if (this.recipeForm.invalid) return;
 
     const formData = new FormData();
     const formValues = this.recipeForm.value;
@@ -212,15 +203,13 @@ export class AddRecipeComponent implements OnInit {
       }
     });
 
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile);
-    }
+    if (this.selectedFile) formData.append('image', this.selectedFile);
 
     if (this.isEditMode()) {
       this.recipeStore.updateRecipe({ id: this.recipeId(), recipeData: formData });
     } else {
       this.recipeStore.addRecipe(formData);
     }
-
   }
+
 }
